@@ -1,5 +1,6 @@
 README for Group 4 
-Pong game for Windows Phone 7
+PongMobile
+Game for Windows Phone 7
 
 Contact info : 
 Ryan Schmidt

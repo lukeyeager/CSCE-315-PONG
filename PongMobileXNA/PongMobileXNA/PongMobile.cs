@@ -10,23 +10,33 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
+using PongScreenManager;
+
 namespace PongMobileXNA
 {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class PongMobile : Microsoft.Xna.Framework.Game
     {
+        ScreenManager screenManager;
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
 
-        public Game1()
+        public PongMobile()
         {
             graphics = new GraphicsDeviceManager(this);
+            //Set the Windows Phone screen resolution
+            graphics.PreferredBackBufferWidth = 480;
+            graphics.PreferredBackBufferHeight = 800;
             Content.RootDirectory = "Content";
-
             // Frame rate is 30 fps by default for Windows Phone.
-            TargetElapsedTime = TimeSpan.FromTicks(333333);
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 30.0);
+            //Create a new instance of the Screen Manager
+            screenManager = new ScreenManager(this);
+            Components.Add(screenManager);
+            //Add two new screens
+            screenManager.AddScreen(new BackgroundScreen());
+            screenManager.AddScreen(new LoadingScreen());
         }
 
         /// <summary>
@@ -48,9 +58,6 @@ namespace PongMobileXNA
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
             // TODO: use this.Content to load your game content here
         }
 
