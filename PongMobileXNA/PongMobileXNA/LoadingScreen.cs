@@ -21,11 +21,16 @@ namespace PongMobileXNA
 
         void BackgroundLoadContent()
         {
+            //Images
             ScreenManager.Game.Content.Load<object>("background");
+            ScreenManager.Game.Content.Load<object>("bottomPaddle");
+            ScreenManager.Game.Content.Load<object>("ball");
+            ScreenManager.Game.Content.Load<object>("title");
+            ScreenManager.Game.Content.Load<object>("topPaddle");
+            //Fonts
             ScreenManager.Game.Content.Load<object>("gamefont");
             ScreenManager.Game.Content.Load<object>("menufont");
             ScreenManager.Game.Content.Load<object>("scorefont");
-            ScreenManager.Game.Content.Load<object>("title");
             ScreenManager.Game.Content.Load<object>("titlefont");
         }
 

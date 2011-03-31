@@ -50,6 +50,7 @@
     <XnaCompressContent>false</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Devices.Sensors, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Xna.Framework">
       <Private>False</Private>
     </Reference>
@@ -95,6 +96,7 @@
     <Compile Include="ScreenManager\MenuEntry.cs" />
     <Compile Include="ScreenManager\MenuScreen.cs" />
     <Compile Include="ScreenManager\ScreenManager.cs" />
+    <Compile Include="Shape.cs" />
     <None Include="Properties\AppManifest.xml">
       <XnaPlatformSpecific>true</XnaPlatformSpecific>
     </None>

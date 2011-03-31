@@ -20,6 +20,15 @@
       <Time>2011-03-29T19:36:50.2232579-05:00</Time>
     </Item>
     <Item>
+      <Source>ball.png</Source>
+      <Name>ball</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\ball.xnb</Output>
+      <Time>2011-03-31T09:26:30.3159483-05:00</Time>
+    </Item>
+    <Item>
       <Source>gamefont.spritefont</Source>
       <Name>gamefont</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -55,6 +64,33 @@
       <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\TitleFont.xnb</Output>
       <Time>2011-03-29T17:28:47.504501-05:00</Time>
     </Item>
+    <Item>
+      <Source>bottomPaddle.png</Source>
+      <Name>bottomPaddle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\bottomPaddle.xnb</Output>
+      <Time>2011-03-31T10:07:51.0950014-05:00</Time>
+    </Item>
+    <Item>
+      <Source>topPaddle.png</Source>
+      <Name>topPaddle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\topPaddle.xnb</Output>
+      <Time>2011-03-31T10:07:42.1551075-05:00</Time>
+    </Item>
+    <Item>
+      <Source>hitWall.wav</Source>
+      <Name>hitWall</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\hitWall.xnb</Output>
+      <Time>2011-03-29T17:28:56.761226-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>WindowsPhone</TargetPlatform>
@@ -69,31 +105,31 @@
     <Assemblies>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-05:00</Value>
+        <Value>2010-08-23T12:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
-        <Value>2010-08-23T13:41:18-05:00</Value>
+        <Value>2010-08-23T12:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-05:00</Value>
+        <Value>2010-08-23T12:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-05:00</Value>
+        <Value>2010-08-23T12:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-05:00</Value>
+        <Value>2010-08-23T12:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2010-08-23T13:41:18-05:00</Value>
+        <Value>2010-08-23T12:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2011-02-11T12:58:47.2866084-06:00</Value>
+        <Value>2011-03-21T10:40:34.3273647-05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
