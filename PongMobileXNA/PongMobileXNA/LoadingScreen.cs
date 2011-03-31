@@ -22,16 +22,19 @@ namespace PongMobileXNA
         void BackgroundLoadContent()
         {
             //Images
-            ScreenManager.Game.Content.Load<object>("background");
-            ScreenManager.Game.Content.Load<object>("bottomPaddle");
-            ScreenManager.Game.Content.Load<object>("ball");
-            ScreenManager.Game.Content.Load<object>("title");
-            ScreenManager.Game.Content.Load<object>("topPaddle");
+            ScreenManager.Game.Content.Load<object>("Images/background");
+            ScreenManager.Game.Content.Load<object>("Images/bottomPaddle");
+            ScreenManager.Game.Content.Load<object>("Images/topPaddle");
+            ScreenManager.Game.Content.Load<object>("Images/ball");
+            ScreenManager.Game.Content.Load<object>("Images/title");
             //Fonts
-            ScreenManager.Game.Content.Load<object>("gamefont");
-            ScreenManager.Game.Content.Load<object>("menufont");
-            ScreenManager.Game.Content.Load<object>("scorefont");
-            ScreenManager.Game.Content.Load<object>("titlefont");
+            ScreenManager.Game.Content.Load<object>("Fonts/gamefont");
+            ScreenManager.Game.Content.Load<object>("Fonts/menufont");
+            ScreenManager.Game.Content.Load<object>("Fonts/scorefont");
+            ScreenManager.Game.Content.Load<object>("Fonts/titlefont");
+            //Sounds
+            ScreenManager.Game.Content.Load<object>("Sounds/hitWall");
+
         }
 
         public override void LoadContent()

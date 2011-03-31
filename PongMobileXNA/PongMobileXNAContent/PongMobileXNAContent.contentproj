@@ -42,61 +42,61 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="background.png">
+    <Compile Include="Images\background.png">
       <Name>background</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="title.png">
+    <Compile Include="Images\title.png">
       <Name>title</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="gamefont.spritefont">
+    <Compile Include="Fonts\gamefont.spritefont">
       <Name>gamefont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
-    <Compile Include="menufont.spritefont">
+    <Compile Include="Fonts\menufont.spritefont">
       <Name>menufont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <SubType>Designer</SubType>
     </Compile>
-    <Compile Include="ScoreFont.spritefont">
+    <Compile Include="Fonts\ScoreFont.spritefont">
       <Name>ScoreFont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
-    <Compile Include="TitleFont.spritefont">
+    <Compile Include="Fonts\TitleFont.spritefont">
       <Name>TitleFont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ball.png">
+    <Compile Include="Images\ball.png">
       <Name>ball</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bottomPaddle.png">
+    <Compile Include="Images\bottomPaddle.png">
       <Name>bottomPaddle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="topPaddle.png">
+    <Compile Include="Images\topPaddle.png">
       <Name>topPaddle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="hitWall.wav">
+    <Compile Include="Sounds\hitWall.wav">
       <Name>hitWall</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>

@@ -1,1 +1,2 @@
 H:\315\PongMobile\PongMobileXNA\PongMobileXNAContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+Z:\315\PongMobile\PongMobileXNA\PongMobileXNAContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache

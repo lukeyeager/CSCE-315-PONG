@@ -63,13 +63,13 @@ namespace PongMobileXNA
         public override void LoadContent()
         {
             //Load Textures
-            ballTexture = ScreenManager.Game.Content.Load<Texture2D>("ball");
-            backgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("background");
-            bottomPaddle.Texture = ScreenManager.Game.Content.Load<Texture2D>("bottomPaddle");
-            topPaddle.Texture = ScreenManager.Game.Content.Load<Texture2D>("topPaddle");
+            ballTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/ball");
+            backgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/background");
+            bottomPaddle.Texture = ScreenManager.Game.Content.Load<Texture2D>("Images/bottomPaddle");
+            topPaddle.Texture = ScreenManager.Game.Content.Load<Texture2D>("Images/topPaddle");
 
             //Load Sound Effects
-            hitWallSound = ScreenManager.Game.Content.Load<SoundEffect>("hitWall");
+            hitWallSound = ScreenManager.Game.Content.Load<SoundEffect>("Sounds/hitWall");
 
             //particles = new ParticleSystem(ScreenManager.Game.Content, ScreenManager.SpriteBatch);
 
@@ -239,7 +239,7 @@ namespace PongMobileXNA
             //Update game statistics
         }
 
-        #region Input
+#region Input
         /// <summary>
         /// Input helper method provided by GameScreen.  Packages up the various input
         /// values for ease of use
@@ -295,7 +295,7 @@ namespace PongMobileXNA
                 bottomPaddle.Velocity.X = MathHelper.Min(input.CurrentGamePadStates[0].ThumbSticks.Left.X * 2.0f, 1.0f);
             }
         }
-        #endregion
+#endregion
 
         
     }

@@ -119,7 +119,7 @@ namespace PongScreenManager
             ContentManager content = Game.Content;
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            font = content.Load<SpriteFont>("menufont");
+            font = content.Load<SpriteFont>("Fonts/menufont");
             blankTexture = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blankTexture.SetData<Color>(new Color[] { Color.White });
 

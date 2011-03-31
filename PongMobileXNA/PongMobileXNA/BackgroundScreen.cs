@@ -22,8 +22,8 @@ namespace PongMobileXNA
 
         public override void LoadContent()
         {
-            title = ScreenManager.Game.Content.Load<Texture2D>("title");
-            background = ScreenManager.Game.Content.Load<Texture2D>("background");
+            title = ScreenManager.Game.Content.Load<Texture2D>("Images/title");
+            background = ScreenManager.Game.Content.Load<Texture2D>("Images/background");
         }
 
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)

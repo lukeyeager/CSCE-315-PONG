@@ -2,93 +2,93 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>background.png</Source>
-      <Name>background</Name>
+      <Source>Images\background.png</Source>
+      <Name>Images\background</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\background.xnb</Output>
+      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\background.xnb</Output>
       <Time>2011-03-29T19:34:22.6955066-05:00</Time>
     </Item>
     <Item>
-      <Source>title.png</Source>
-      <Name>title</Name>
+      <Source>Images\title.png</Source>
+      <Name>Images\title</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\title.xnb</Output>
+      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\title.xnb</Output>
       <Time>2011-03-29T19:36:50.2232579-05:00</Time>
     </Item>
     <Item>
-      <Source>ball.png</Source>
-      <Name>ball</Name>
+      <Source>Images\ball.png</Source>
+      <Name>Images\ball</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\ball.xnb</Output>
+      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\ball.xnb</Output>
       <Time>2011-03-31T09:26:30.3159483-05:00</Time>
     </Item>
     <Item>
-      <Source>gamefont.spritefont</Source>
-      <Name>gamefont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\gamefont.xnb</Output>
-      <Time>2011-03-29T17:28:46.475524-05:00</Time>
-    </Item>
-    <Item>
-      <Source>menufont.spritefont</Source>
-      <Name>menufont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\menufont.xnb</Output>
-      <Time>2011-03-29T19:51:22.000147-05:00</Time>
-    </Item>
-    <Item>
-      <Source>ScoreFont.spritefont</Source>
-      <Name>ScoreFont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\ScoreFont.xnb</Output>
-      <Time>2011-03-29T17:28:47.127871-05:00</Time>
-    </Item>
-    <Item>
-      <Source>TitleFont.spritefont</Source>
-      <Name>TitleFont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\TitleFont.xnb</Output>
-      <Time>2011-03-29T17:28:47.504501-05:00</Time>
-    </Item>
-    <Item>
-      <Source>bottomPaddle.png</Source>
-      <Name>bottomPaddle</Name>
+      <Source>Images\bottomPaddle.png</Source>
+      <Name>Images\bottomPaddle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\bottomPaddle.xnb</Output>
+      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\bottomPaddle.xnb</Output>
       <Time>2011-03-31T10:07:51.0950014-05:00</Time>
     </Item>
     <Item>
-      <Source>topPaddle.png</Source>
-      <Name>topPaddle</Name>
+      <Source>Images\topPaddle.png</Source>
+      <Name>Images\topPaddle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\topPaddle.xnb</Output>
+      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\topPaddle.xnb</Output>
       <Time>2011-03-31T10:07:42.1551075-05:00</Time>
     </Item>
     <Item>
-      <Source>hitWall.wav</Source>
-      <Name>hitWall</Name>
+      <Source>Fonts\gamefont.spritefont</Source>
+      <Name>Fonts\gamefont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Fonts\gamefont.xnb</Output>
+      <Time>2011-03-29T17:28:46.475524-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Fonts\menufont.spritefont</Source>
+      <Name>Fonts\menufont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Fonts\menufont.xnb</Output>
+      <Time>2011-03-29T19:51:22.000147-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Fonts\ScoreFont.spritefont</Source>
+      <Name>Fonts\ScoreFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Fonts\ScoreFont.xnb</Output>
+      <Time>2011-03-29T17:28:47.127871-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Fonts\TitleFont.spritefont</Source>
+      <Name>Fonts\TitleFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Fonts\TitleFont.xnb</Output>
+      <Time>2011-03-29T17:28:47.504501-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Sounds\hitWall.wav</Source>
+      <Name>Sounds\hitWall</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\hitWall.xnb</Output>
+      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Sounds\hitWall.xnb</Output>
       <Time>2011-03-29T17:28:56.761226-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -97,10 +97,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>H:\315\PongMobile\PongMobileXNA\PongMobileXNAContent\</RootDirectory>
-      <LoggerRootDirectory>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\</LoggerRootDirectory>
-      <IntermediateDirectory>H:\315\PongMobile\PongMobileXNA\PongMobileXNAContent\obj\Windows Phone\Debug\</IntermediateDirectory>
-      <OutputDirectory>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\</OutputDirectory>
+      <RootDirectory>Z:\315\PongMobile\PongMobileXNA\PongMobileXNAContent\</RootDirectory>
+      <LoggerRootDirectory>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\</LoggerRootDirectory>
+      <IntermediateDirectory>Z:\315\PongMobile\PongMobileXNA\PongMobileXNAContent\obj\Windows Phone\Debug\</IntermediateDirectory>
+      <OutputDirectory>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -129,7 +129,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2011-03-21T10:40:34.3273647-05:00</Value>
+        <Value>2011-03-13T07:43:27.7198578-05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
