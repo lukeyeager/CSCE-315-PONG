@@ -5,7 +5,7 @@ using System.Text;
 
 using PongScreens;
 
-namespace PongMobileXNA
+namespace PongClasses
 {
     class Shape
     {

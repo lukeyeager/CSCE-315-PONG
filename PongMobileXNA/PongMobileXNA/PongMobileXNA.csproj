@@ -101,7 +101,7 @@
     <Compile Include="ScreenManager\MenuEntry.cs" />
     <Compile Include="ScreenManager\MenuScreen.cs" />
     <Compile Include="ScreenManager\ScreenManager.cs" />
-    <Compile Include="Shape.cs" />
+    <Compile Include="PongClasses\Shape.cs" />
     <None Include="Properties\AppManifest.xml">
       <XnaPlatformSpecific>true</XnaPlatformSpecific>
     </None>

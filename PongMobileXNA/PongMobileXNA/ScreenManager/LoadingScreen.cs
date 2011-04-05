@@ -24,7 +24,7 @@ namespace PongScreens
             ScreenManager.Game.Content.Load<object>("Images/background");
             ScreenManager.Game.Content.Load<object>("Images/bottomPaddle");
             ScreenManager.Game.Content.Load<object>("Images/topPaddle");
-            ScreenManager.Game.Content.Load<object>("Images/ball");
+            ScreenManager.Game.Content.Load<object>("Images/defaultBall");
             ScreenManager.Game.Content.Load<object>("Images/title");
             //Fonts
             ScreenManager.Game.Content.Load<object>("Fonts/gamefont");

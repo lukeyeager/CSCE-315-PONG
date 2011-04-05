@@ -76,7 +76,7 @@ namespace PongScreens
         public override void LoadContent()
         {
             //Load Textures
-            defaultBallTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/ball");
+            defaultBallTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/defaultBall");
             backgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/background");
             bottomPaddle.Texture = ScreenManager.Game.Content.Load<Texture2D>("Images/bottomPaddle");
             topPaddle.Texture = ScreenManager.Game.Content.Load<Texture2D>("Images/topPaddle");
