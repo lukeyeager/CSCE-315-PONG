@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using PongScreens;
-
-namespace PongMobileXNA
+namespace PongScreens.GameScreens
 {
-    class Shape
+    public class MultitouchGameScreen : PongGameScreen
     {
-        //TODO: Ryan, have some fun
     }
 }

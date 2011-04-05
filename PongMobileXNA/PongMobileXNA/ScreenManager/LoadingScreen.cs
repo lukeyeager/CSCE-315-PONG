@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using PongScreenManager;
 using System.Threading;
 using Microsoft.Xna.Framework;
 
-namespace PongMobileXNA
+namespace PongScreens
 {
     class LoadingScreen : GameScreen
     {

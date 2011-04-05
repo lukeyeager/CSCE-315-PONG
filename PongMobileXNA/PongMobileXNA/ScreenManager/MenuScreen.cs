@@ -28,7 +28,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input.Touch;
 
-namespace PongScreenManager
+namespace PongScreens
 {
   /// <summary>
   /// Base class for screens that contain a menu of options. The user can

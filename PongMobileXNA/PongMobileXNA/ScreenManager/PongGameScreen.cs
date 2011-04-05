@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using PongScreenManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
@@ -13,15 +12,29 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Devices.Sensors;
 
-namespace PongMobileXNA
+using PongClasses;
+
+namespace PongScreens
 {
-    class GameplayScreen : GameScreen
+    /// <summary>
+    /// Represents a Paddle
+    /// </summary>
+    public class Paddle
+    {
+        public Vector2 Position;
+        public Vector2 Velocity;
+        public Texture2D Texture;
+    }
+
+    /// <summary>
+    /// Abstract class for all Pong game screens
+    /// Other classes derive from this one, overriding the necessary functions
+    /// </summary>
+    public abstract class PongGameScreen : GameScreen
     {
         //Textures (images)
         Texture2D backgroundTexture;
-        Texture2D ballTexture;
-        //Texture2D bottomPaddleTexture;
-        //Texture2D topPaddleTexture;
+        Texture2D defaultBallTexture;
 
         //Sound Effects
         SoundEffect hitWallSound;
@@ -36,7 +49,7 @@ namespace PongMobileXNA
         Paddle topPaddle;
         Paddle bottomPaddle;
 
-        public GameplayScreen()
+        public PongGameScreen()
         {
             //TransitionOnTime = TimeSpan.FromSeconds(0.0);
             //TransitionOffTime = TimeSpan.FromSeconds(0.0);
@@ -63,7 +76,7 @@ namespace PongMobileXNA
         public override void LoadContent()
         {
             //Load Textures
-            ballTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/ball");
+            defaultBallTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/ball");
             backgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/background");
             bottomPaddle.Texture = ScreenManager.Game.Content.Load<Texture2D>("Images/bottomPaddle");
             topPaddle.Texture = ScreenManager.Game.Content.Load<Texture2D>("Images/topPaddle");
@@ -179,10 +192,10 @@ namespace PongMobileXNA
         /// Returns an instance of a ball
         /// </summary>
         /// <returns>A ball ready to place into the world.</returns>
-        Ball CreateBall()
+        DefaultBall CreateBall()
         {
-            Ball b = new Ball();
-            b.Texture = ballTexture;
+            DefaultBall b = new DefaultBall();
+            b.Texture = defaultBallTexture;
             balls.Add(b);
             return b;
         }
@@ -231,7 +244,7 @@ namespace PongMobileXNA
         /// </summary>
         void Start()
         {
-            Ball b = CreateBall();
+            DefaultBall b = CreateBall();
             b.Position = new Vector2(240, 400);
             b.Velocity = new Vector2(200, 200);
             b.IsActive = true;
@@ -298,27 +311,5 @@ namespace PongMobileXNA
 #endregion
 
         
-    }
-
-    /// <summary>
-    /// Represents a Pong ball
-    /// </summary>
-    public class Ball
-    {
-        public Vector2 Position;
-        public Vector2 Velocity;
-        public Texture2D Texture;
-        public float spin;
-        public bool IsActive;
-    }
-
-    /// <summary>
-    /// Represents a Paddle
-    /// </summary>
-    public class Paddle
-    {
-        public Vector2 Position;
-        public Vector2 Velocity;
-        public Texture2D Texture;
     }
 }

@@ -24,7 +24,7 @@
 using System;
 using Microsoft.Xna.Framework;
 
-namespace PongScreenManager
+namespace PongScreens
 {
     /// <summary>
     /// Enum describes the screen transition state.

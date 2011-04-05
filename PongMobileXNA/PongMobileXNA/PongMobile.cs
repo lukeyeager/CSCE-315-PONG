@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
-using PongScreenManager;
+using PongScreens;
 
 namespace PongMobileXNA
 {

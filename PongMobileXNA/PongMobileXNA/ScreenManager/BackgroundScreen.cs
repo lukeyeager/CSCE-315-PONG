@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using PongScreenManager;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace PongMobileXNA
+namespace PongScreens
 {
     class BackgroundScreen : GameScreen
     {

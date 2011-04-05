@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using PongScreenManager;
+using PongScreens.GameScreens;
 
-namespace PongMobileXNA
+namespace PongScreens
 {
     class MainMenuScreen : MenuScreen
     {
@@ -13,40 +13,42 @@ namespace PongMobileXNA
             : base("Main")
         {
             // Create our menu entries.
-            MenuEntry singleGameMenuEntry = new MenuEntry("SinglePlayer");
+            MenuEntry campaignGameMenuEntry = new MenuEntry("Campaign");
+            MenuEntry endlessGameMenuEntry = new MenuEntry("Endless");
             MenuEntry multiTouchGameMenuEntry = new MenuEntry("MultiTouch");
-            //MenuEntry multiPhoneGameMenuEntry = new MenuEntry("MultiPhone");
             MenuEntry aboutMenuEntry = new MenuEntry("About");
             MenuEntry exitMenuEntry = new MenuEntry("Exit");
+
             // Hook up menu event handlers.
-            singleGameMenuEntry.Selected += SingleGameMenuEntrySelected;
+            campaignGameMenuEntry.Selected += CampaignGameMenuEntrySelected;
+            endlessGameMenuEntry.Selected += EndlessGameMenuEntrySelected;
             multiTouchGameMenuEntry.Selected += MultiTouchGameMenuEntrySelected;
-            //multiPhoneGameMenuEntry.Selected += MultiPhoneGameMenuEntrySelected;
             aboutMenuEntry.Selected += AboutMenuEntrySelected;
             exitMenuEntry.Selected += OnCancel;
+
             // Add entries to the menu.
-            MenuEntries.Add(singleGameMenuEntry);
+            MenuEntries.Add(campaignGameMenuEntry);
+            MenuEntries.Add(endlessGameMenuEntry);
             MenuEntries.Add(multiTouchGameMenuEntry);
-            //MenuEntries.Add(multiPhoneGameMenuEntry);
             MenuEntries.Add(aboutMenuEntry);
             MenuEntries.Add(exitMenuEntry);
         }
 
-        void SingleGameMenuEntrySelected(object sender, EventArgs e)
+        void CampaignGameMenuEntrySelected(object sender, EventArgs e)
         {
-            ScreenManager.AddScreen(new GameplayScreen());
+            ScreenManager.AddScreen(new CampaignGameScreen());
+        }
+        void EndlessGameMenuEntrySelected(object sender, EventArgs e)
+        {
+            ScreenManager.AddScreen(new EndlessGameScreen());
         }
         void MultiTouchGameMenuEntrySelected(object sender, EventArgs e)
         {
-            ScreenManager.AddScreen(new GameplayScreen());
-        }
-        void MultiPhoneGameMenuEntrySelected(object sender, EventArgs e)
-        {
-            ScreenManager.AddScreen(new GameplayScreen());
+            ScreenManager.AddScreen(new MultitouchGameScreen());
         }
         void AboutMenuEntrySelected(object sender, EventArgs e)
         {
-            //ScreenManager.AddScreen(new AboutScreen());
+            ScreenManager.AddScreen(new AboutScreen());
         }
 
         protected override void OnCancel()

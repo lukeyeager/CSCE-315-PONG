@@ -25,7 +25,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace PongScreenManager
+namespace PongScreens
 {
     /// <summary>
     /// Helper class represents a single entry in a MenuScreen. By default this
