@@ -70,7 +70,7 @@ namespace PongScreens
 
             topPaddle = new Paddle();
             topPaddle.Velocity = new Vector2();
-            topPaddle.Position = new Vector2(200,0);
+            topPaddle.Position = new Vector2(200, 0);
         }
 
         public override void LoadContent()
@@ -115,6 +115,7 @@ namespace PongScreens
                 bottomPaddle.Position = new Vector2(800 - bottomPaddle.Texture.Width, bottomPaddle.Position.Y);
 
             UpdateBalls(elapsed);
+            HandleAI();
             CheckHits();
             //particles.Update(elapsed);
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
@@ -214,11 +215,11 @@ namespace PongScreens
                 balls[i].Position += balls[i].Velocity * elapsed;
                 if (balls[i].Position.Y < bottomPaddle.Texture.Height)
                 {
-                    balls[i].Velocity.Y = - balls[i].Velocity.Y;
+                    balls[i].Velocity.Y = -balls[i].Velocity.Y;
                 }
                 else if (balls[i].Position.Y > 800 - topPaddle.Texture.Height - balls[i].Texture.Height)
                 {
-                    balls[i].Velocity.Y = - balls[i].Velocity.Y;
+                    balls[i].Velocity.Y = -balls[i].Velocity.Y;
                 }
                 if (balls[i].Position.X < 0)
                 {
@@ -252,7 +253,7 @@ namespace PongScreens
             //Update game statistics
         }
 
-#region Input
+        #region Input
         /// <summary>
         /// Input helper method provided by GameScreen.  Packages up the various input
         /// values for ease of use
@@ -308,8 +309,43 @@ namespace PongScreens
                 bottomPaddle.Velocity.X = MathHelper.Min(input.CurrentGamePadStates[0].ThumbSticks.Left.X * 2.0f, 1.0f);
             }
         }
-#endregion
+        #endregion
 
-        
+        #region AI
+        /// <summary>
+        /// Handles movement of the top paddle in single player
+        /// </summary>
+        /// <param name="input">The state of the gamepads</param>       
+        public void HandleAI()
+        {
+            //I want the paddle to pursue the ball once it's gone past
+            //the screen's halfway point, before that the paddle will
+            //just move to the center
+            float ballPursuit = balls[0].Position.X;
+            if (balls[0].Position.Y < 500) //arbitrary, what's half the screen?
+            {
+                if (topPaddle.Position.X > balls[0].Position.X) //is the ball on the right?
+                {
+                    topPaddle.Position.X -= 10;
+                    if (topPaddle.Position.X < 480 - topPaddle.Texture.Width) //if I hit the wall, move the other way
+                        topPaddle.Position.X += 10;
+                }
+                else //the ball must be on the left
+                {
+                    topPaddle.Position.X += 10;
+                    if (topPaddle.Position.X > 480 - topPaddle.Texture.Width)
+                        topPaddle.Position.X -= 10;
+                }
+            }
+            else
+            {
+                if (topPaddle.Position.X > 240)
+                    topPaddle.Position.X -= 10;
+                if (topPaddle.Position.X < 240)
+                    topPaddle.Position.X += 10;
+            }
+        }
+        #endregion
+
     }
 }
