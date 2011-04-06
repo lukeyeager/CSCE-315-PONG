@@ -318,6 +318,7 @@ namespace PongScreens
         /// <param name="input">The state of the gamepads</param>       
         public void HandleAI()
         {
+            int MAX_SPEED = 8;
             //I want the paddle to pursue the ball once it's gone past
             //the screen's halfway point, before that the paddle will
             //just move to the center
@@ -326,23 +327,31 @@ namespace PongScreens
             {
                 if (topPaddle.Position.X > balls[0].Position.X) //is the ball on the right?
                 {
-                    topPaddle.Position.X -= 10;
-                    if (topPaddle.Position.X < 480 - topPaddle.Texture.Width) //if I hit the wall, move the other way
-                        topPaddle.Position.X += 10;
+                    //TODO : Fix bounds of field
+                    /*if (topPaddle.Position.X + MAX_SPEED + topPaddle.Texture.Width > 480)
+                        topPaddle.Position.X = 480 - topPaddle.Texture.Width;*/
+                    if (topPaddle.Position.X - balls[0].Position.X < MAX_SPEED)
+                        topPaddle.Position.X -= topPaddle.Position.X - balls[0].Position.X;
+                    else
+                        topPaddle.Position.X -= MAX_SPEED;
                 }
-                else //the ball must be on the left
+                else if (topPaddle.Position.X < balls[0].Position.X)//the ball must be on the left
                 {
-                    topPaddle.Position.X += 10;
-                    if (topPaddle.Position.X > 480 - topPaddle.Texture.Width)
-                        topPaddle.Position.X -= 10;
+                    //TODO : Fix bounds of field
+                    /*if (topPaddle.Position.X - MAX_SPEED < 0)
+                        topPaddle.Position.X = 0;*/
+                    if (balls[0].Position.X - topPaddle.Position.X < MAX_SPEED)
+                        topPaddle.Position.X += balls[0].Position.X - topPaddle.Position.X;
+                    else
+                        topPaddle.Position.X += MAX_SPEED;
                 }
             }
             else
             {
-                if (topPaddle.Position.X > 240)
-                    topPaddle.Position.X -= 10;
-                if (topPaddle.Position.X < 240)
-                    topPaddle.Position.X += 10;
+                if (topPaddle.Position.X > 240 - topPaddle.Texture.Width/2)
+                    topPaddle.Position.X -= 5;
+                if (topPaddle.Position.X < 240 - topPaddle.Texture.Width/2)
+                    topPaddle.Position.X += 5;
             }
         }
         #endregion
