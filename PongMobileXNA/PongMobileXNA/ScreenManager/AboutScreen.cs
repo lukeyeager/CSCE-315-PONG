@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PongScreens
+namespace PONG
 {
-    class AboutScreen : MenuScreen
+    class AboutScreen : GameScreen
     {
         /// <summary>
         /// Constructor.
         /// </summary>
         public AboutScreen()
-            : base("About")
         {
         }
     }

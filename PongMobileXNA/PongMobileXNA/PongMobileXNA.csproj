@@ -86,12 +86,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Misc\AudioManager.cs" />
     <Compile Include="PongClasses\Ball.cs" />
+    <Compile Include="PongClasses\Paddle.cs" />
     <Compile Include="ScreenManager\AboutScreen.cs" />
-    <Compile Include="ScreenManager\GameScreens\CampaignGameScreen.cs" />
+    <Compile Include="Screens\CampaignGameScreen.cs" />
     <Compile Include="ScreenManager\BackgroundScreen.cs" />
-    <Compile Include="ScreenManager\GameScreens\EndlessGameScreen.cs" />
-    <Compile Include="ScreenManager\GameScreens\MultitouchGameScreen.cs" />
+    <Compile Include="Screens\EndlessGameScreen.cs" />
+    <Compile Include="Screens\MultitouchGameScreen.cs" />
     <Compile Include="ScreenManager\PongGameScreen.cs" />
     <Compile Include="ScreenManager\LoadingScreen.cs" />
     <Compile Include="ScreenManager\MainMenuScreen.cs" />
@@ -109,7 +111,7 @@
       <XnaPlatformSpecific>true</XnaPlatformSpecific>
     </None>
     <Compile Include="Program.cs" />
-    <Compile Include="PongMobile.cs" />
+    <Compile Include="Pong.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
@@ -120,8 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PongMobileXNAContent\PongMobileXNAContent.contentproj">
-      <Name>PongMobileXNAContent</Name>
+      <Name>PongMobileXNAContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{FFC9164A-EEB9-48D0-AAEE-09F11E4971D9}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

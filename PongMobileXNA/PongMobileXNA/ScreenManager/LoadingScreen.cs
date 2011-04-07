@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using Microsoft.Xna.Framework;
 
-namespace PongScreens
+namespace PONG
 {
     class LoadingScreen : GameScreen
     {
@@ -22,8 +22,7 @@ namespace PongScreens
         {
             //Images
             ScreenManager.Game.Content.Load<object>("Images/background");
-            ScreenManager.Game.Content.Load<object>("Images/bottomPaddle");
-            ScreenManager.Game.Content.Load<object>("Images/topPaddle");
+            ScreenManager.Game.Content.Load<object>("Images/defaultPaddle");
             ScreenManager.Game.Content.Load<object>("Images/defaultBall");
             ScreenManager.Game.Content.Load<object>("Images/title");
             //Fonts

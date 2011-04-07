@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using PONG;
-
-namespace PongClasses
+namespace PONG
 {
-    class Shape
+    public class EndlessGameScreen : PongGameScreen
     {
-        //TODO: Ryan, have some fun
     }
 }

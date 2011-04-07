@@ -29,7 +29,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 
-namespace PongScreens
+namespace PONG
 {
     /// <summary>
     /// The screen manager is a component which manages one or more GameScreen

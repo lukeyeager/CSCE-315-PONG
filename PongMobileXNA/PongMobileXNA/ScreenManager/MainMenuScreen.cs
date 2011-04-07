@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
-using PongScreens.GameScreens;
-
-namespace PongScreens
+namespace PONG
 {
     class MainMenuScreen : MenuScreen
     {
+        #region Initialize
+
         public MainMenuScreen()
             : base("Main")
         {
@@ -34,20 +35,36 @@ namespace PongScreens
             MenuEntries.Add(exitMenuEntry);
         }
 
+        #endregion
+
+        #region Callbacks
+
         void CampaignGameMenuEntrySelected(object sender, EventArgs e)
         {
+            foreach (GameScreen screen in ScreenManager.GetScreens())
+                screen.ExitScreen();
+
             ScreenManager.AddScreen(new CampaignGameScreen());
         }
         void EndlessGameMenuEntrySelected(object sender, EventArgs e)
         {
+            foreach (GameScreen screen in ScreenManager.GetScreens())
+                screen.ExitScreen();
+
             ScreenManager.AddScreen(new EndlessGameScreen());
         }
         void MultiTouchGameMenuEntrySelected(object sender, EventArgs e)
         {
+            foreach (GameScreen screen in ScreenManager.GetScreens())
+                screen.ExitScreen();
+
             ScreenManager.AddScreen(new MultitouchGameScreen());
         }
         void AboutMenuEntrySelected(object sender, EventArgs e)
         {
+            foreach (GameScreen screen in ScreenManager.GetScreens())
+                screen.ExitScreen();
+
             ScreenManager.AddScreen(new AboutScreen());
         }
 
@@ -55,6 +72,8 @@ namespace PongScreens
         {
             ScreenManager.Game.Exit();
         }
+
+        #endregion
 
     }
 }

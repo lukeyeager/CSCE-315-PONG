@@ -25,7 +25,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace PongScreens
+namespace PONG
 {
     /// <summary>
     /// Helper class represents a single entry in a MenuScreen. By default this
@@ -103,7 +103,7 @@ namespace PongScreens
                                  bool isSelected, GameTime gameTime)
         {
             // Draw the selected entry in yellow, otherwise white.
-            Color color = isSelected ? Color.LightBlue : Color.White;
+            Color color = Color.WhiteSmoke; //isSelected ? Color.Yellow : Color.White;
             float scale = 2.0f;
 
             // Modify the alpha to fade text out during transitions.
@@ -114,9 +114,9 @@ namespace PongScreens
             SpriteBatch spriteBatch = screenManager.SpriteBatch;
             SpriteFont font = screenManager.Font;
 
-            Vector2 origin = new Vector2(-1, - 1);
+            Vector2 origin = new Vector2(-1, -1);
 
-          
+
             spriteBatch.DrawString(font, text, position, Color.Black, 0,
                                    origin, scale, SpriteEffects.None, 0);
             origin = new Vector2(0, 0);
@@ -124,9 +124,9 @@ namespace PongScreens
             spriteBatch.DrawString(font, text, position, color, 0,
                                    origin, scale, SpriteEffects.None, 0);
 
-          Vector2 actualSize = font.MeasureString(text);
-          EntryPosition = new Rectangle((int)position.X, (int)position.Y,
-                                        (int)(actualSize.X * scale), (int)(actualSize.Y * scale));
+            Vector2 actualSize = font.MeasureString(text);
+            EntryPosition = new Rectangle((int)position.X, (int)position.Y,
+                                          (int)(actualSize.X * scale), (int)(actualSize.Y * scale));
         }
 
 

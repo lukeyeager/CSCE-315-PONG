@@ -18,6 +18,11 @@ namespace PongClasses
         public Vector2 Velocity;
         public Texture2D Texture;
         public bool IsActive;
+
+        public void Update(float elapsed)
+        {
+            Position += Velocity * elapsed;
+        }
     }
     class DefaultBall : Ball
     {

@@ -84,18 +84,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Images\bottomPaddle.png">
-      <Name>bottomPaddle</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Images\topPaddle.png">
-      <Name>topPaddle</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sounds\hitWall.wav">
       <Name>hitWall</Name>
       <Importer>WavImporter</Importer>
@@ -105,6 +93,13 @@
   <ItemGroup>
     <Compile Include="Images\defaultBall.png">
       <Name>defaultBall</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\defaultPaddle.png">
+      <Name>defaultPaddle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

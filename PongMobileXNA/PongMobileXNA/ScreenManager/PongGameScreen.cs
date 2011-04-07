@@ -14,17 +14,8 @@ using Microsoft.Devices.Sensors;
 
 using PongClasses;
 
-namespace PongScreens
+namespace PONG
 {
-    /// <summary>
-    /// Represents a Paddle
-    /// </summary>
-    public class Paddle
-    {
-        public Vector2 Position;
-        public Vector2 Velocity;
-        public Texture2D Texture;
-    }
 
     /// <summary>
     /// Abstract class for all Pong game screens
@@ -32,27 +23,53 @@ namespace PongScreens
     /// </summary>
     public abstract class PongGameScreen : GameScreen
     {
+        #region Fields
         //Textures (images)
-        Texture2D backgroundTexture;
-        Texture2D defaultBallTexture;
+        public Texture2D backgroundTexture;
+        public Texture2D defaultBallTexture;
+        public Texture2D defaultPaddleTexture;
 
         //Sound Effects
-        SoundEffect hitWallSound;
+        public SoundEffect hitWallSound;
 
-        //Input Members
-        AccelerometerReadingEventArgs accelState;
-        TouchCollection touchState;
-        Accelerometer Accelerometer;
+        // Input related variables
+        public AccelerometerReadingEventArgs accelState;
+        public Accelerometer Accelerometer;
+        public TouchLocation bottomPaddleTouch;
+        public Int32 bottomPaddleTouchId;
+        public List<TouchLocation> lastTouchInput;
+        public List<Keys> lastKeyInput;
+        public float lastAccelInput;
 
         //Data Members
-        List<Ball> balls;
-        Paddle topPaddle;
-        Paddle bottomPaddle;
+        public List<Ball> balls;
+        public Paddle topPaddle;
+        public Paddle bottomPaddle;
+
+        //Screen size
+        public Int32 screenLeftBound;
+        public Int32 screenRightBound;
+        public Int32 screenTopBound;
+        public Int32 screenBottomBound;
+
+        //Settings
+        public const float maxPaddleSpeed = 8f;
+        public const float paddleFriction = 0.8f;
+        public const float paddleBounceFriction = 0.0f;
+
+        #endregion
+
+        #region Initialization
 
         public PongGameScreen()
         {
-            //TransitionOnTime = TimeSpan.FromSeconds(0.0);
-            //TransitionOffTime = TimeSpan.FromSeconds(0.0);
+            TransitionOnTime = TimeSpan.FromSeconds(0.0);
+            TransitionOffTime = TimeSpan.FromSeconds(0.0);
+            screenLeftBound = 0;
+            screenRightBound = 480;
+            screenTopBound = 0;
+            screenBottomBound = 800;
+
             Accelerometer = new Accelerometer();
             if (Accelerometer.State == SensorState.Ready)
             {
@@ -62,24 +79,23 @@ namespace PongScreens
                 };
                 Accelerometer.Start();
             }
+            lastAccelInput = 0f;
+            bottomPaddleTouch = new TouchLocation();
+            bottomPaddleTouchId = -1;
+            lastTouchInput = new List<TouchLocation>();
+            lastKeyInput = new List<Keys>();
+
             balls = new List<Ball>();
-
-            bottomPaddle = new Paddle();
-            bottomPaddle.Velocity = new Vector2();
-            bottomPaddle.Position = new Vector2(200, 750);
-
-            topPaddle = new Paddle();
-            topPaddle.Velocity = new Vector2();
-            topPaddle.Position = new Vector2(200, 0);
+            bottomPaddle = new DefaultPaddle(new Vector2(200, 750), new Vector2());
+            topPaddle = new DefaultPaddle(new Vector2(200, 0), new Vector2());
         }
 
         public override void LoadContent()
         {
             //Load Textures
+            defaultPaddleTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/defaultPaddle");
             defaultBallTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/defaultBall");
             backgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/background");
-            bottomPaddle.Texture = ScreenManager.Game.Content.Load<Texture2D>("Images/bottomPaddle");
-            topPaddle.Texture = ScreenManager.Game.Content.Load<Texture2D>("Images/topPaddle");
 
             //Load Sound Effects
             hitWallSound = ScreenManager.Game.Content.Load<SoundEffect>("Sounds/hitWall");
@@ -91,11 +107,42 @@ namespace PongScreens
             Start();
         }
 
+        /// <summary>
+        /// Starts a new game session, setting all game states to initial values.
+        /// </summary>
+        void Start()
+        {
+            DefaultBall b = CreateBall();
+            b.Position = new Vector2(240, 400);
+            b.Velocity = new Vector2(200, 200);
+            b.IsActive = true;
+            b.spin = 0;
+            bottomPaddle.Texture = defaultPaddleTexture;
+            topPaddle.Texture = defaultPaddleTexture;
+            //Update game statistics
+        }
+
+        #endregion
+
+        #region Finalization
+
         public override void UnloadContent()
         {
             //particles = null;
             base.UnloadContent();
         }
+
+        private void finishCurrentGame()
+        {
+            foreach (GameScreen screen in ScreenManager.GetScreens())
+                screen.ExitScreen();
+            ScreenManager.AddScreen(new BackgroundScreen());
+            ScreenManager.AddScreen(new MainMenuScreen());
+        }
+
+        #endregion
+
+        #region Update
 
         /// <summary>
         /// Runs one frame of update for the game.
@@ -107,19 +154,126 @@ namespace PongScreens
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            // Move the bottomPaddle
-            bottomPaddle.Position += bottomPaddle.Velocity * 128.0f * elapsed;
-            if (bottomPaddle.Position.X <= 0.0f)
-                bottomPaddle.Position = new Vector2(0.0f, bottomPaddle.Position.Y);
-            if (bottomPaddle.Position.X + bottomPaddle.Texture.Width >= 800)
-                bottomPaddle.Position = new Vector2(800 - bottomPaddle.Texture.Width, bottomPaddle.Position.Y);
-
+            UpdateBottomPaddle(elapsed);
+            UpdateTopPaddle(elapsed);
+            UpdateBottomPaddle(elapsed);
             UpdateBalls(elapsed);
-            HandleAI();
             CheckHits();
             //particles.Update(elapsed);
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
         }
+        
+        /// <summary>
+        /// Moves all of the balls
+        /// </summary>
+        /// <param name="elapsed"></param>
+        void UpdateBalls(float elapsed)
+        {
+            foreach (Ball ball in balls)
+            {
+                if (ball.IsActive == false) //Ignore inactive balls
+                    continue;
+
+                ball.Update(elapsed);
+
+                //TODO: check for collide with topPaddle
+                if (ball.Position.Y < screenTopBound + bottomPaddle.Texture.Height)
+                {
+                    ball.Velocity.Y = -ball.Velocity.Y;
+                }
+                //TODO: check for collide with bottomPaddle
+                else if (ball.Position.Y + topPaddle.Texture.Height + ball.Texture.Height > screenBottomBound) 
+                {
+                    ball.Velocity.Y = -ball.Velocity.Y;
+                }
+
+                if (ball.Position.Y < screenTopBound || ball.Position.Y > screenBottomBound)
+                    ball.IsActive = false;
+
+                //TODO: check for collide with left wall
+                if (ball.Position.X < screenLeftBound)
+                {
+                    ball.Velocity.X = -ball.Velocity.X;
+                }
+                //TODO: check for collide with right wall
+                else if (ball.Position.X + ball.Texture.Width > screenRightBound)
+                {
+                    ball.Velocity.X = -ball.Velocity.X;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Update the bottom paddle
+        /// </summary>
+        /// <param name="elapsed"></param>
+        void UpdateBottomPaddle(float elapsed)
+        {
+            //Update from touch input
+            if (bottomPaddleTouchId != -1)
+            {
+                var newX = bottomPaddleTouch.Position.X + 5 - bottomPaddle.Width / 2;
+                bottomPaddle.Velocity.X = (newX - bottomPaddle.Position.X) / ( 128.0f * elapsed);
+            }
+            //Update from key input
+            else if (lastKeyInput.Count > 0) 
+            {
+                if (lastKeyInput.Contains(Keys.Left) && !lastKeyInput.Contains(Keys.Right))
+                {
+                    bottomPaddle.Velocity.X += -1.0f;
+                }
+                else if (lastKeyInput.Contains(Keys.Right) && !lastKeyInput.Contains(Keys.Left))
+                {
+                    bottomPaddle.Velocity.X += 1.0f;
+                }
+            }
+
+            if (bottomPaddle.Velocity.X > maxPaddleSpeed)
+                bottomPaddle.Velocity.X = maxPaddleSpeed;
+            else if (bottomPaddle.Velocity.X < -maxPaddleSpeed)
+                bottomPaddle.Velocity.X = -maxPaddleSpeed;
+
+            // Move the bottomPaddle
+            bottomPaddle.Position += bottomPaddle.Velocity * 128.0f * elapsed;
+            bottomPaddle.Velocity *= paddleFriction;
+
+            if (bottomPaddle.Position.X <= screenLeftBound)
+            {
+                bottomPaddle.Position = new Vector2(screenLeftBound, bottomPaddle.Position.Y);
+                bottomPaddle.Velocity.X *= -paddleBounceFriction;
+            }
+            if (bottomPaddle.Position.X + bottomPaddle.Width >= screenRightBound)
+            {
+                bottomPaddle.Position = new Vector2(screenRightBound - bottomPaddle.Width, bottomPaddle.Position.Y);
+                bottomPaddle.Velocity *= -paddleBounceFriction;
+            }
+        }
+
+        /// <summary>
+        /// Update the top paddle
+        /// Each derived class should define this for themselves
+        /// </summary>
+        /// <param name="elapsed"></param>
+        public virtual void UpdateTopPaddle(float elapsed)
+        {
+            topPaddle.Position += topPaddle.Velocity * 128.0f * elapsed;
+
+            if (topPaddle.Position.X <= screenLeftBound)
+            {
+                topPaddle.Position = new Vector2(screenLeftBound, topPaddle.Position.Y);
+                topPaddle.Velocity = new Vector2(0, 0);
+            }
+            if (topPaddle.Position.X + topPaddle.Width >= screenRightBound)
+            {
+                topPaddle.Position = new Vector2(screenRightBound - topPaddle.Width, topPaddle.Position.Y);
+                topPaddle.Velocity = new Vector2(0, 0);
+            }
+        }
+
+        #endregion
+
+        #region Draw
+
 
         /// <summary>
         /// Draw the game world, effects, and HUD
@@ -181,13 +335,115 @@ namespace PongScreens
             //TODO: draw score?
         }
 
-        private void finishCurrentGame()
+        #endregion
+
+        #region Input
+        /// <summary>
+        /// Input helper method provided by GameScreen.  Packages up the various input
+        /// values for ease of use
+        /// </summary>
+        /// <param name="input">The state of the gamepads</param>
+        public override void HandleInput(InputState input)
         {
-            foreach (GameScreen screen in ScreenManager.GetScreens())
-                screen.ExitScreen();
-            ScreenManager.AddScreen(new BackgroundScreen());
-            ScreenManager.AddScreen(new MainMenuScreen());
+            if (input == null)
+                throw new ArgumentNullException("input");
+
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            {
+                foreach (GameScreen screen in ScreenManager.GetScreens())
+                    screen.ExitScreen();
+                
+                ScreenManager.AddScreen(new BackgroundScreen());
+                ScreenManager.AddScreen(new MainMenuScreen());
+            }
+
+            //if (input.IsPauseGame(null))
+            //{
+            //    PauseCurrentGame();
+            //}
+
+            /// Read Touchscreen input
+            /// For now, add all "Pressed" and "Moved" events to lastPressInput
+            if (input.TouchState.Count > 0)
+            {
+                lastTouchInput = new List<TouchLocation>();
+                foreach (var touch in input.TouchState)
+                {
+                    switch (touch.State)
+                    {
+                        case TouchLocationState.Pressed:
+                            if (bottomPaddleTouchId == -1 &&
+                                touch.Position.Y > bottomPaddle.Position.Y &&
+                                touch.Position.X > bottomPaddle.Position.X - 20 &&
+                                touch.Position.X < bottomPaddle.Position.X + bottomPaddle.Width + 20)
+                            {
+                                bottomPaddleTouch = touch;
+                                bottomPaddleTouchId = touch.Id;
+                            }
+                            else
+                            {
+                                lastTouchInput.Add(touch);
+                            }
+                            break;
+                        case TouchLocationState.Moved:
+                            if (touch.Id == bottomPaddleTouchId)
+                            {
+                                bottomPaddleTouch = touch;
+                            }
+                            else
+                            {
+                                lastTouchInput.Add(touch);
+                            }
+                            break;
+                        case TouchLocationState.Released:
+                            if (touch.Id == bottomPaddleTouchId)
+                            {
+                                bottomPaddleTouchId = -1;
+                            }
+                            else
+                            {
+                                lastTouchInput.Add(touch);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            /// Read Accelerometer input
+            /// (use it to update powerups)
+            float movement = 0.0f;
+            if (accelState != null)
+            {
+                if (Math.Abs(accelState.X) > 0.10f)
+                {
+                    if (accelState.X > 0.0f)
+                        movement = 10.0f;
+                    else
+                        movement = -10.0f;
+                }
+            }
+            // TODO: use this movement to update powerups
+
+            /// Read keyboard input
+            /// (use it for debugging)
+            KeyboardState keyState = Keyboard.GetState();
+            lastKeyInput = new List<Keys>();
+            if (keyState.IsKeyDown(Keys.Left))
+            {
+                lastKeyInput.Add(Keys.Left);
+            }
+            if (keyState.IsKeyDown(Keys.Right))
+            {
+                lastKeyInput.Add(Keys.Right);
+            }
+
         }
+        #endregion
+
+        #region Private functions
 
         /// <summary>
         /// Returns an instance of a ball
@@ -202,36 +458,6 @@ namespace PongScreens
         }
 
         /// <summary>
-        /// Moves all of the balls
-        /// </summary>
-        /// <param name="elapsed"></param>
-        void UpdateBalls(float elapsed)
-        {
-            for (int i = 0; i < balls.Count; ++i)
-            {
-                if (balls[i].IsActive == false) //Ignore inactive balls
-                    continue;
-
-                balls[i].Position += balls[i].Velocity * elapsed;
-                if (balls[i].Position.Y < bottomPaddle.Texture.Height)
-                {
-                    balls[i].Velocity.Y = -balls[i].Velocity.Y;
-                }
-                else if (balls[i].Position.Y > 800 - topPaddle.Texture.Height - balls[i].Texture.Height)
-                {
-                    balls[i].Velocity.Y = -balls[i].Velocity.Y;
-                }
-                if (balls[i].Position.X < 0)
-                {
-                    balls[i].Velocity.X = -balls[i].Velocity.X;
-                }
-                else if (balls[i].Position.X > 480 - balls[i].Texture.Width)
-                {
-                    balls[i].Velocity.X = -balls[i].Velocity.X;
-                }
-            }
-        }
-        /// <summary>
         /// Performs all ball collision detection.  Also handles game logic
         /// when a hit occurs, such as killing something, adding score, ending the game, etc.
         /// </summary>
@@ -240,122 +466,7 @@ namespace PongScreens
             //TODO: all this
         }
 
-        /// <summary>
-        /// Starts a new game session, setting all game states to initial values.
-        /// </summary>
-        void Start()
-        {
-            DefaultBall b = CreateBall();
-            b.Position = new Vector2(240, 400);
-            b.Velocity = new Vector2(200, 200);
-            b.IsActive = true;
-            b.spin = 0;
-            //Update game statistics
-        }
-
-        #region Input
-        /// <summary>
-        /// Input helper method provided by GameScreen.  Packages up the various input
-        /// values for ease of use
-        /// </summary>
-        /// <param name="input">The state of the gamepads</param>
-        public override void HandleInput(InputState input)
-        {
-            if (input == null)
-                throw new ArgumentNullException("input");
-
-            touchState = TouchPanel.GetState();
-            bool buttonTouched = false;
-            //interpret touch screen presses
-            foreach (TouchLocation location in touchState)
-            {
-                switch (location.State)
-                {
-                    case TouchLocationState.Pressed:
-                        buttonTouched = true;
-                        break;
-                    case TouchLocationState.Moved:
-                        break;
-                    case TouchLocationState.Released:
-                        break;
-                }
-            }
-            float movement = 0.0f;
-            if (accelState != null)
-            {
-                if (Math.Abs(accelState.X) > 0.10f)
-                {
-                    if (accelState.X > 0.0f)
-                        movement = 1.0f;
-                    else
-                        movement = -1.0f;
-                }
-            }
-            bottomPaddle.Velocity.X = movement;
-
-            //This section handles tank movement.  We only allow one "movement" action
-            //to occur at once so that touchpad devices don't get double hits.
-            KeyboardState keyState = Keyboard.GetState();
-            if (input.CurrentGamePadStates[0].DPad.Left == ButtonState.Pressed || keyState.IsKeyDown(Keys.Left))
-            {
-                bottomPaddle.Velocity.X = -1.0f;
-            }
-            else if (input.CurrentGamePadStates[0].DPad.Right == ButtonState.Pressed || keyState.IsKeyDown(Keys.Right))
-            {
-                bottomPaddle.Velocity.X = 1.0f;
-            }
-            else
-            {
-                bottomPaddle.Velocity.X = MathHelper.Min(input.CurrentGamePadStates[0].ThumbSticks.Left.X * 2.0f, 1.0f);
-            }
-        }
         #endregion
-
-        #region AI
-        /// <summary>
-        /// Handles movement of the top paddle in single player
-        /// </summary>
-        /// <param name="input">The state of the gamepads</param>       
-        public void HandleAI()
-        {
-            int MAX_SPEED = 8;
-            float CenterOfPaddle = topPaddle.Position.X + (topPaddle.Texture.Width / 2);
-            float CenterOfBall = balls[0].Position.X + (balls[0].Texture.Width/2);
-            //I want the paddle to pursue the ball once it's gone past
-            //the screen's halfway point, before that the paddle will
-            //just move to the center
-            if (balls[0].Position.Y < 400) //arbitrary, what's half the screen?
-            {
-                if (CenterOfPaddle > CenterOfBall) //is the ball on the right?
-                {
-                    //TODO : Fix bounds of field
-                    /*if (topPaddle.Position.X + MAX_SPEED + topPaddle.Texture.Width > 480)
-                        topPaddle.Position.X = 480 - topPaddle.Texture.Width;*/
-                    if (CenterOfPaddle - CenterOfBall < MAX_SPEED)
-                        topPaddle.Position.X -= CenterOfPaddle - CenterOfBall;
-                    else
-                        topPaddle.Position.X -= MAX_SPEED;
-                }
-                else if (CenterOfPaddle < CenterOfBall)//the ball must be on the left
-                {
-                    //TODO : Fix bounds of field
-                    /*if (CenterOfPaddle - MAX_SPEED < 0)
-                        CenterOfPaddle = 0;*/
-                    if (CenterOfBall - CenterOfPaddle < MAX_SPEED)
-                        topPaddle.Position.X += CenterOfBall - CenterOfPaddle;
-                    else
-                        topPaddle.Position.X += MAX_SPEED;
-                }
-            }
-            else
-            {
-                if (topPaddle.Position.X > 240 - topPaddle.Texture.Width/2)
-                    topPaddle.Position.X -= 5;
-                if (topPaddle.Position.X < 240 - topPaddle.Texture.Width/2)
-                    topPaddle.Position.X += 5;
-            }
-        }
-        #endregion
-
+        
     }
 }

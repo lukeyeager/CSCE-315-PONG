@@ -23,8 +23,10 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
+using System.Collections.Generic;
 
-namespace PongScreens
+namespace PONG
 {
     /// <summary>
     /// Helper for reading input from keyboard and gamepad. This class tracks both
@@ -38,6 +40,7 @@ namespace PongScreens
 
         public readonly GamePadState[] CurrentGamePadStates;
         public readonly GamePadState[] LastGamePadStates;
+        public TouchCollection TouchState;
 
         /// <summary>
         /// Constructs a new input state.
@@ -117,8 +120,10 @@ namespace PongScreens
             for (int i = 0; i < MaxInputs; i++)
             {
                 LastGamePadStates[i] = CurrentGamePadStates[i];
-                CurrentGamePadStates[i] = GamePad.GetState((PlayerIndex)i,GamePadDeadZone.IndependentAxes);
+                CurrentGamePadStates[i] = GamePad.GetState((PlayerIndex)i, GamePadDeadZone.IndependentAxes);
             }
+
+            TouchState = TouchPanel.GetState();
         }
 
         /// <summary>
