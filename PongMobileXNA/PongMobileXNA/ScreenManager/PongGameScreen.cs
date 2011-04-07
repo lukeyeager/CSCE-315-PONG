@@ -319,29 +319,30 @@ namespace PongScreens
         public void HandleAI()
         {
             int MAX_SPEED = 8;
+            float CenterOfPaddle = topPaddle.Position.X + (topPaddle.Texture.Width / 2);
+            float CenterOfBall = balls[0].Position.X + (balls[0].Texture.Width/2);
             //I want the paddle to pursue the ball once it's gone past
             //the screen's halfway point, before that the paddle will
             //just move to the center
-            float ballPursuit = balls[0].Position.X;
-            if (balls[0].Position.Y < 500) //arbitrary, what's half the screen?
+            if (balls[0].Position.Y < 400) //arbitrary, what's half the screen?
             {
-                if (topPaddle.Position.X > balls[0].Position.X) //is the ball on the right?
+                if (CenterOfPaddle > CenterOfBall) //is the ball on the right?
                 {
                     //TODO : Fix bounds of field
                     /*if (topPaddle.Position.X + MAX_SPEED + topPaddle.Texture.Width > 480)
                         topPaddle.Position.X = 480 - topPaddle.Texture.Width;*/
-                    if (topPaddle.Position.X - balls[0].Position.X < MAX_SPEED)
-                        topPaddle.Position.X -= topPaddle.Position.X - balls[0].Position.X;
+                    if (CenterOfPaddle - CenterOfBall < MAX_SPEED)
+                        topPaddle.Position.X -= CenterOfPaddle - CenterOfBall;
                     else
                         topPaddle.Position.X -= MAX_SPEED;
                 }
-                else if (topPaddle.Position.X < balls[0].Position.X)//the ball must be on the left
+                else if (CenterOfPaddle < CenterOfBall)//the ball must be on the left
                 {
                     //TODO : Fix bounds of field
-                    /*if (topPaddle.Position.X - MAX_SPEED < 0)
-                        topPaddle.Position.X = 0;*/
-                    if (balls[0].Position.X - topPaddle.Position.X < MAX_SPEED)
-                        topPaddle.Position.X += balls[0].Position.X - topPaddle.Position.X;
+                    /*if (CenterOfPaddle - MAX_SPEED < 0)
+                        CenterOfPaddle = 0;*/
+                    if (CenterOfBall - CenterOfPaddle < MAX_SPEED)
+                        topPaddle.Position.X += CenterOfBall - CenterOfPaddle;
                     else
                         topPaddle.Position.X += MAX_SPEED;
                 }
