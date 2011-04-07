@@ -177,12 +177,12 @@ namespace PONG
                 ball.Update(elapsed);
 
                 //TODO: check for collide with topPaddle
-                if (ball.Position.Y < screenTopBound + bottomPaddle.Texture.Height)
+                if (ball.Position.Y < 40)
                 {
                     ball.Velocity.Y = -ball.Velocity.Y;
                 }
                 //TODO: check for collide with bottomPaddle
-                else if (ball.Position.Y + topPaddle.Texture.Height + ball.Texture.Height > screenBottomBound) 
+                else if (ball.Position.Y > 730) 
                 {
                     ball.Velocity.Y = -ball.Velocity.Y;
                 }
@@ -237,14 +237,14 @@ namespace PONG
             bottomPaddle.Position += bottomPaddle.Velocity * 128.0f * elapsed;
             bottomPaddle.Velocity *= paddleFriction;
 
-            if (bottomPaddle.Position.X <= screenLeftBound)
+            if (bottomPaddle.Position.X <= screenLeftBound - bottomPaddle.Width/2)
             {
-                bottomPaddle.Position = new Vector2(screenLeftBound, bottomPaddle.Position.Y);
+                bottomPaddle.Position = new Vector2(screenLeftBound - bottomPaddle.Width / 2, bottomPaddle.Position.Y);
                 bottomPaddle.Velocity.X *= -paddleBounceFriction;
             }
-            if (bottomPaddle.Position.X + bottomPaddle.Width >= screenRightBound)
+            if (bottomPaddle.Position.X + bottomPaddle.Width >= screenRightBound + bottomPaddle.Width/2)
             {
-                bottomPaddle.Position = new Vector2(screenRightBound - bottomPaddle.Width, bottomPaddle.Position.Y);
+                bottomPaddle.Position = new Vector2(screenRightBound - bottomPaddle.Width + bottomPaddle.Width / 2, bottomPaddle.Position.Y);
                 bottomPaddle.Velocity *= -paddleBounceFriction;
             }
         }
@@ -258,14 +258,14 @@ namespace PONG
         {
             topPaddle.Position += topPaddle.Velocity * 128.0f * elapsed;
 
-            if (topPaddle.Position.X <= screenLeftBound)
+            if (topPaddle.Position.X <= screenLeftBound - topPaddle.Width/2)
             {
-                topPaddle.Position = new Vector2(screenLeftBound, topPaddle.Position.Y);
+                topPaddle.Position = new Vector2(screenLeftBound - topPaddle.Width/2, topPaddle.Position.Y);
                 topPaddle.Velocity = new Vector2(0, 0);
             }
-            if (topPaddle.Position.X + topPaddle.Width >= screenRightBound)
+            if (topPaddle.Position.X + topPaddle.Width >= screenRightBound + topPaddle.Width/2)
             {
-                topPaddle.Position = new Vector2(screenRightBound - topPaddle.Width, topPaddle.Position.Y);
+                topPaddle.Position = new Vector2(screenRightBound - topPaddle.Width + topPaddle.Width/2, topPaddle.Position.Y);
                 topPaddle.Velocity = new Vector2(0, 0);
             }
         }
