@@ -20,11 +20,9 @@ namespace PongClasses
     /// </summary>
     public abstract class Paddle
     {
-        public Paddle(Vector2 pos, Vector2 vel)
+        public Paddle()
         {
             State = PaddleState.Release;
-            Position = pos;
-            Velocity = vel;
         }
 
         public Vector2 Position;
@@ -38,13 +36,20 @@ namespace PongClasses
                 return Texture.Width;
             }
         }
+        public Int32 Height
+        {
+            get
+            {
+                return Texture.Height;
+            }
+        }
             
     }
 
     public class DefaultPaddle : Paddle
     {
-        public DefaultPaddle(Vector2 pos, Vector2 vel)
-            :base(pos,vel)
+        public DefaultPaddle()
+            :base()
         {}
     }
 }

@@ -23,6 +23,14 @@ namespace PongClasses
         {
             Position += Velocity * elapsed;
         }
+
+        public Int32 Diameter
+        {
+            get
+            {
+                return Texture.Width;
+            }
+        }
     }
     class DefaultBall : Ball
     {

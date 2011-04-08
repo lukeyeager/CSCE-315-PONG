@@ -7,19 +7,11 @@ namespace PONG
 {
     public class CampaignGameScreen : PongGameScreen
     {
-
-        public override void LoadContent()
-        {
-            base.LoadContent();
-        }
-
         public override void UpdateTopPaddle(float elapsed)
         {
             HandleAI();
             base.UpdateTopPaddle(elapsed);
         }
-
-
 
         #region AI
         /// <summary>

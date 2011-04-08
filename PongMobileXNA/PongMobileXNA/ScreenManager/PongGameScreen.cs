@@ -24,10 +24,14 @@ namespace PONG
     public abstract class PongGameScreen : GameScreen
     {
         #region Fields
+
         //Textures (images)
         public Texture2D backgroundTexture;
         public Texture2D defaultBallTexture;
-        public Texture2D defaultPaddleTexture;
+        public Texture2D defaultTopPaddleTexture;
+        public Texture2D defaultBottomPaddleTexture;
+
+        ParticleSystem particles;
 
         //Sound Effects
         public SoundEffect hitWallSound;
@@ -53,6 +57,7 @@ namespace PONG
         public Int32 screenBottomBound;
 
         //Settings
+        public const Int32 paddleTouchBufferSize = 50;
         public const float maxPaddleSpeed = 8f;
         public const float paddleFriction = 0.8f;
         public const float paddleBounceFriction = 0.0f;
@@ -86,21 +91,23 @@ namespace PONG
             lastKeyInput = new List<Keys>();
 
             balls = new List<Ball>();
-            bottomPaddle = new DefaultPaddle(new Vector2(200, 750), new Vector2());
-            topPaddle = new DefaultPaddle(new Vector2(200, 0), new Vector2());
+            bottomPaddle = new DefaultPaddle();
+            topPaddle = new DefaultPaddle();
         }
 
         public override void LoadContent()
         {
             //Load Textures
-            defaultPaddleTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/defaultPaddle");
+            defaultTopPaddleTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/defaultTopPaddle");
+            defaultBottomPaddleTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/defaultBottomPaddle");
             defaultBallTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/defaultBall");
             backgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/background");
 
             //Load Sound Effects
             hitWallSound = ScreenManager.Game.Content.Load<SoundEffect>("Sounds/hitWall");
 
-            //particles = new ParticleSystem(ScreenManager.Game.Content, ScreenManager.SpriteBatch);
+            //Create ParticleSystem
+            particles = new ParticleSystem(ScreenManager.Game.Content, ScreenManager.SpriteBatch);
 
             base.LoadContent();
 
@@ -110,16 +117,17 @@ namespace PONG
         /// <summary>
         /// Starts a new game session, setting all game states to initial values.
         /// </summary>
-        void Start()
+        public virtual void Start()
         {
             DefaultBall b = CreateBall();
             b.Position = new Vector2(240, 400);
             b.Velocity = new Vector2(200, 200);
             b.IsActive = true;
             b.spin = 0;
-            bottomPaddle.Texture = defaultPaddleTexture;
-            topPaddle.Texture = defaultPaddleTexture;
-            //Update game statistics
+            bottomPaddle.Texture = defaultBottomPaddleTexture;
+            bottomPaddle.Position = new Vector2(((screenRightBound - screenLeftBound) / 2) - bottomPaddle.Width / 2, screenBottomBound - (bottomPaddle.Height + paddleTouchBufferSize));
+            topPaddle.Texture = defaultTopPaddleTexture;
+            topPaddle.Position = new Vector2(((screenRightBound - screenLeftBound) / 2) - topPaddle.Width / 2, 0);
         }
 
         #endregion
@@ -128,7 +136,7 @@ namespace PONG
 
         public override void UnloadContent()
         {
-            //particles = null;
+            particles = null;
             base.UnloadContent();
         }
 
@@ -159,7 +167,7 @@ namespace PONG
             UpdateBottomPaddle(elapsed);
             UpdateBalls(elapsed);
             CheckHits();
-            //particles.Update(elapsed);
+            particles.Update(elapsed);
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
         }
         
@@ -180,11 +188,13 @@ namespace PONG
                 if (ball.Position.Y < 40)
                 {
                     ball.Velocity.Y = -ball.Velocity.Y;
+                    particles.CreateDefaultCollisionEffect(new Vector2(ball.Position.X + ball.Diameter / 2, ball.Position.Y + ball.Diameter / 2));
                 }
                 //TODO: check for collide with bottomPaddle
                 else if (ball.Position.Y > 730) 
                 {
                     ball.Velocity.Y = -ball.Velocity.Y;
+                    particles.CreateDefaultCollisionEffect(new Vector2(ball.Position.X + ball.Diameter / 2, ball.Position.Y + ball.Diameter / 2));
                 }
 
                 if (ball.Position.Y < screenTopBound || ball.Position.Y > screenBottomBound)
@@ -194,11 +204,13 @@ namespace PONG
                 if (ball.Position.X < screenLeftBound)
                 {
                     ball.Velocity.X = -ball.Velocity.X;
+                    particles.CreateDefaultCollisionEffect(new Vector2(ball.Position.X + ball.Diameter / 2, ball.Position.Y + ball.Diameter / 2));
                 }
                 //TODO: check for collide with right wall
                 else if (ball.Position.X + ball.Texture.Width > screenRightBound)
                 {
                     ball.Velocity.X = -ball.Velocity.X;
+                    particles.CreateDefaultCollisionEffect(new Vector2(ball.Position.X + ball.Diameter / 2, ball.Position.Y + ball.Diameter / 2));
                 }
             }
         }
@@ -220,11 +232,11 @@ namespace PONG
             {
                 if (lastKeyInput.Contains(Keys.Left) && !lastKeyInput.Contains(Keys.Right))
                 {
-                    bottomPaddle.Velocity.X += -1.0f;
+                    bottomPaddle.Velocity.X += -0.5f;
                 }
                 else if (lastKeyInput.Contains(Keys.Right) && !lastKeyInput.Contains(Keys.Left))
                 {
-                    bottomPaddle.Velocity.X += 1.0f;
+                    bottomPaddle.Velocity.X += 0.5f;
                 }
             }
 
@@ -257,6 +269,7 @@ namespace PONG
         public virtual void UpdateTopPaddle(float elapsed)
         {
             topPaddle.Position += topPaddle.Velocity * 128.0f * elapsed;
+            topPaddle.Velocity *= paddleFriction;
 
             if (topPaddle.Position.X <= screenLeftBound - topPaddle.Width/2)
             {
@@ -284,10 +297,10 @@ namespace PONG
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             ScreenManager.SpriteBatch.Begin();
             DrawBackground();
-            DrawBalls();
             DrawBottomPaddle();
             DrawTopPaddle();
-            //particles.Draw();
+            particles.Draw();
+            DrawBalls();
             //DrawHud();
             ScreenManager.SpriteBatch.End();
         }
@@ -364,7 +377,7 @@ namespace PONG
             //}
 
             /// Read Touchscreen input
-            /// For now, add all "Pressed" and "Moved" events to lastPressInput
+            /// For now, add all "Pressed" and "Moved" events to lastTouchInput
             if (input.TouchState.Count > 0)
             {
                 lastTouchInput = new List<TouchLocation>();
@@ -431,6 +444,8 @@ namespace PONG
             /// (use it for debugging)
             KeyboardState keyState = Keyboard.GetState();
             lastKeyInput = new List<Keys>();
+            
+            //For default, bottom paddle movement
             if (keyState.IsKeyDown(Keys.Left))
             {
                 lastKeyInput.Add(Keys.Left);
@@ -438,6 +453,16 @@ namespace PONG
             if (keyState.IsKeyDown(Keys.Right))
             {
                 lastKeyInput.Add(Keys.Right);
+            }
+
+            //For multitouch, top paddle movement
+            if (keyState.IsKeyDown(Keys.F))
+            {
+                lastKeyInput.Add(Keys.F);
+            }
+            if (keyState.IsKeyDown(Keys.D))
+            {
+                lastKeyInput.Add(Keys.D);
             }
 
         }
