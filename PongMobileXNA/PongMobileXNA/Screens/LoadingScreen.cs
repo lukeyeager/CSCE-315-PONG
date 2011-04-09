@@ -22,14 +22,24 @@ namespace PONG
         {
             //Images
             ScreenManager.Game.Content.Load<object>("Images/background");
-            ScreenManager.Game.Content.Load<object>("Images/defaultPaddle");
+            ScreenManager.Game.Content.Load<object>("Images/defaultTopPaddle");
+            ScreenManager.Game.Content.Load<object>("Images/defaultBottomPaddle");
             ScreenManager.Game.Content.Load<object>("Images/defaultBall");
             ScreenManager.Game.Content.Load<object>("Images/title");
+            ScreenManager.Game.Content.Load<object>("Images/defaultCollisionEffect1");
+            ScreenManager.Game.Content.Load<object>("Images/defaultCollisionEffect2");
+            ScreenManager.Game.Content.Load<object>("Images/defaultCollisionEffect3");
+            ScreenManager.Game.Content.Load<object>("Images/defaultCollisionEffect4");
+            ScreenManager.Game.Content.Load<object>("Images/defaultCollisionEffect5");
+            ScreenManager.Game.Content.Load<object>("Images/defaultCollisionEffect6");
+            ScreenManager.Game.Content.Load<object>("Images/defaultCollisionEffect7");
+
             //Fonts
             ScreenManager.Game.Content.Load<object>("Fonts/gamefont");
             ScreenManager.Game.Content.Load<object>("Fonts/menufont");
             ScreenManager.Game.Content.Load<object>("Fonts/scorefont");
             ScreenManager.Game.Content.Load<object>("Fonts/titlefont");
+
             //Sounds
             ScreenManager.Game.Content.Load<object>("Sounds/hitWall");
 

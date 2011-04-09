@@ -21,11 +21,9 @@ namespace PongClasses
     /// </summary>
     public abstract class Paddle : PongObject
     {
-        public Paddle(Vector2 pos, Vector2 vel)
+        public Paddle()
         {
             State = PaddleState.Release;
-            Position = pos;
-            Velocity = vel;
         }
 
         public Vector2 Position;
@@ -40,10 +38,18 @@ namespace PongClasses
             }
         }
 
+        public Int32 Height
+        {
+            get
+            {
+                return Texture.Height;
+            }
+        }
+
         public override void UpdateShape()
         {
             int roundRadius = Texture.Height / 2;
-            shape = new RoundedRectangle(
+            shape = new PongShapes.Rectangle(
                 new Coordinate((int)Position.X + roundRadius, (int)Position.Y),
                 Texture.Width, Texture.Height, 0);
         }
@@ -51,8 +57,8 @@ namespace PongClasses
 
     public class DefaultPaddle : Paddle
     {
-        public DefaultPaddle(Vector2 pos, Vector2 vel)
-            : base(pos, vel)
+        public DefaultPaddle()
+            : base()
         { }
     }
 }

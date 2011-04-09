@@ -87,16 +87,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Misc\AudioManager.cs" />
+    <Compile Include="Misc\CollisionManager.cs" />
+    <Compile Include="Misc\ParticleSystem.cs" />
     <Compile Include="PongClasses\Ball.cs" />
     <Compile Include="PongClasses\Paddle.cs" />
+    <Compile Include="PongClasses\PongObject.cs" />
+    <Compile Include="PongClasses\PongShapes\Circle.cs" />
+    <Compile Include="PongClasses\PongShapes\Coordinate.cs" />
+    <Compile Include="PongClasses\PongShapes\Line.cs" />
+    <Compile Include="PongClasses\PongShapes\Rectangle.cs" />
+    <Compile Include="PongClasses\PongShapes\RoundedRectangle.cs" />
+    <Compile Include="PongClasses\Wall.cs" />
     <Compile Include="ScreenManager\AboutScreen.cs" />
     <Compile Include="Screens\CampaignGameScreen.cs" />
-    <Compile Include="ScreenManager\BackgroundScreen.cs" />
+    <Compile Include="Screens\BackgroundScreen.cs" />
     <Compile Include="Screens\EndlessGameScreen.cs" />
     <Compile Include="Screens\MultitouchGameScreen.cs" />
     <Compile Include="ScreenManager\PongGameScreen.cs" />
-    <Compile Include="ScreenManager\LoadingScreen.cs" />
-    <Compile Include="ScreenManager\MainMenuScreen.cs" />
+    <Compile Include="Screens\LoadingScreen.cs" />
+    <Compile Include="Screens\MainMenuScreen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenManager\GameScreen.cs" />
     <Compile Include="ScreenManager\InputState.cs" />

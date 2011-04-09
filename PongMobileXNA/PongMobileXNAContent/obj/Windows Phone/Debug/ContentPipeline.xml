@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\background.xnb</Output>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\background.xnb</Output>
       <Time>2011-04-07T16:38:08.131346-05:00</Time>
     </Item>
     <Item>
@@ -16,17 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\title.xnb</Output>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\title.xnb</Output>
       <Time>2011-04-07T16:38:08.140332-05:00</Time>
-    </Item>
-    <Item>
-      <Source>Images\ball.png</Source>
-      <Name>Images\ball</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\ball.xnb</Output>
-      <Time>2011-04-07T16:38:08.13334-05:00</Time>
     </Item>
     <Item>
       <Source>Images\defaultBall.png</Source>
@@ -34,17 +25,89 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultBall.xnb</Output>
-      <Time>2011-04-07T16:38:08.137337-05:00</Time>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultBall.xnb</Output>
+      <Time>2011-04-07T18:27:01.869008-05:00</Time>
     </Item>
     <Item>
-      <Source>Images\defaultPaddle.png</Source>
-      <Name>Images\defaultPaddle</Name>
+      <Source>Images\defaultBottomPaddle.png</Source>
+      <Name>Images\defaultBottomPaddle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultPaddle.xnb</Output>
-      <Time>2011-04-07T16:42:36.124081-05:00</Time>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultBottomPaddle.xnb</Output>
+      <Time>2011-04-07T18:13:18.547152-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\defaultCollisionEffect1.png</Source>
+      <Name>Images\defaultCollisionEffect1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect1.xnb</Output>
+      <Time>2011-04-07T19:00:29.965908-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\defaultCollisionEffect2.png</Source>
+      <Name>Images\defaultCollisionEffect2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect2.xnb</Output>
+      <Time>2011-04-07T19:01:19.306476-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\defaultCollisionEffect3.png</Source>
+      <Name>Images\defaultCollisionEffect3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect3.xnb</Output>
+      <Time>2011-04-07T19:01:33.514256-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\defaultCollisionEffect4.png</Source>
+      <Name>Images\defaultCollisionEffect4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect4.xnb</Output>
+      <Time>2011-04-07T19:01:54.709044-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\defaultCollisionEffect5.png</Source>
+      <Name>Images\defaultCollisionEffect5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect5.xnb</Output>
+      <Time>2011-04-07T19:02:12.206522-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\defaultCollisionEffect6.png</Source>
+      <Name>Images\defaultCollisionEffect6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect6.xnb</Output>
+      <Time>2011-04-07T19:02:26.871843-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\defaultCollisionEffect7.png</Source>
+      <Name>Images\defaultCollisionEffect7</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect7.xnb</Output>
+      <Time>2011-04-07T19:02:46.245452-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\defaultTopPaddle.png</Source>
+      <Name>Images\defaultTopPaddle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultTopPaddle.xnb</Output>
+      <Time>2011-04-07T18:14:18.141503-05:00</Time>
     </Item>
     <Item>
       <Source>Fonts\gamefont.spritefont</Source>
@@ -52,7 +115,7 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Fonts\gamefont.xnb</Output>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Fonts\gamefont.xnb</Output>
       <Time>2011-04-07T16:38:08.109367-05:00</Time>
     </Item>
     <Item>
@@ -61,7 +124,7 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Fonts\menufont.xnb</Output>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Fonts\menufont.xnb</Output>
       <Time>2011-04-07T16:38:08.111359-05:00</Time>
     </Item>
     <Item>
@@ -70,7 +133,7 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Fonts\ScoreFont.xnb</Output>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Fonts\ScoreFont.xnb</Output>
       <Time>2011-04-07T16:38:08.088385-05:00</Time>
     </Item>
     <Item>
@@ -79,7 +142,7 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Fonts\TitleFont.xnb</Output>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Fonts\TitleFont.xnb</Output>
       <Time>2011-04-07T16:38:08.108363-05:00</Time>
     </Item>
     <Item>
@@ -88,7 +151,7 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Sounds\hitWall.xnb</Output>
+      <Output>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Sounds\hitWall.xnb</Output>
       <Time>2011-04-07T16:38:08.165311-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -97,39 +160,39 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>Z:\315\PongMobile\PongMobileXNA\PongMobileXNAContent\</RootDirectory>
-      <LoggerRootDirectory>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\</LoggerRootDirectory>
-      <IntermediateDirectory>Z:\315\PongMobile\PongMobileXNA\PongMobileXNAContent\obj\Windows Phone\Debug\</IntermediateDirectory>
-      <OutputDirectory>Z:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\</OutputDirectory>
+      <RootDirectory>H:\315\PongMobile\PongMobileXNA\PongMobileXNAContent\</RootDirectory>
+      <LoggerRootDirectory>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\</LoggerRootDirectory>
+      <IntermediateDirectory>H:\315\PongMobile\PongMobileXNA\PongMobileXNAContent\obj\Windows Phone\Debug\</IntermediateDirectory>
+      <OutputDirectory>H:\315\PongMobile\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2010-08-23T12:41:18-05:00</Value>
+        <Value>2010-08-23T13:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
-        <Value>2010-08-23T12:41:18-05:00</Value>
+        <Value>2010-08-23T13:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2010-08-23T12:41:18-05:00</Value>
+        <Value>2010-08-23T13:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2010-08-23T12:41:18-05:00</Value>
+        <Value>2010-08-23T13:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2010-08-23T12:41:18-05:00</Value>
+        <Value>2010-08-23T13:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2010-08-23T12:41:18-05:00</Value>
+        <Value>2010-08-23T13:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2011-03-21T10:46:12.6979103-05:00</Value>
+        <Value>2011-02-11T13:08:41.4091411-06:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

@@ -31,6 +31,14 @@ namespace PongClasses
             int ballRadius = Texture.Width / 2;
             shape = new Circle(new Coordinate((int)Position.X + ballRadius, (int)Position.Y + ballRadius), ballRadius);
         }
+
+        public Int32 Diameter
+        {
+            get
+            {
+                return Texture.Width;
+            }
+        }
     }
     class DefaultBall : Ball
     {
