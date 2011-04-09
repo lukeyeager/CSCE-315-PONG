@@ -116,9 +116,16 @@ namespace PONG
             b.Position = new Vector2(240, 400);
             b.Velocity = new Vector2(200, 200);
             b.IsActive = true;
+            b.UpdateShape();
             b.spin = 0;
             bottomPaddle.Texture = defaultPaddleTexture;
+            bottomPaddle.UpdateShape();
             topPaddle.Texture = defaultPaddleTexture;
+            topPaddle.UpdateShape();
+            CollisionManager.AddObject("Paddle", bottomPaddle);
+            CollisionManager.AddObject("Paddle", topPaddle);
+            CollisionManager.AddObject("Ball", b);
+            RegisterCallbackFunctions();
             //Update game statistics
         }
 
@@ -156,7 +163,7 @@ namespace PONG
 
             UpdateBottomPaddle(elapsed);
             UpdateTopPaddle(elapsed);
-            UpdateBottomPaddle(elapsed);
+            //UpdateBottomPaddle(elapsed);
             UpdateBalls(elapsed);
             CheckHits();
             //particles.Update(elapsed);
@@ -175,16 +182,18 @@ namespace PONG
                     continue;
 
                 ball.Update(elapsed);
-
-                //TODO: check for collide with topPaddle
-                if (ball.Position.Y < 40)
+                ////TODO: check for collide with topPaddle
+                //if (ball.Position.Y < 40)
+                //{
+                //    ball.Velocity.Y = -ball.Velocity.Y;
+                //}
+                ////TODO: check for collide with bottomPaddle
+                //else if (ball.Position.Y > 730) 
+                //{
+                //    ball.Velocity.Y = -ball.Velocity.Y;
+                //}
+                if (ball.Position.Y < 30)
                 {
-                    ball.Velocity.Y = -ball.Velocity.Y;
-                }
-                //TODO: check for collide with bottomPaddle
-                else if (ball.Position.Y > 730) 
-                {
-                    ball.Velocity.Y = -ball.Velocity.Y;
                 }
 
                 if (ball.Position.Y < screenTopBound || ball.Position.Y > screenBottomBound)
@@ -247,6 +256,7 @@ namespace PONG
                 bottomPaddle.Position = new Vector2(screenRightBound - bottomPaddle.Width + bottomPaddle.Width / 2, bottomPaddle.Position.Y);
                 bottomPaddle.Velocity *= -paddleBounceFriction;
             }
+            bottomPaddle.UpdateShape();
         }
 
         /// <summary>
@@ -268,6 +278,7 @@ namespace PONG
                 topPaddle.Position = new Vector2(screenRightBound - topPaddle.Width + topPaddle.Width/2, topPaddle.Position.Y);
                 topPaddle.Velocity = new Vector2(0, 0);
             }
+            topPaddle.UpdateShape();
         }
 
         #endregion
@@ -353,7 +364,8 @@ namespace PONG
             {
                 foreach (GameScreen screen in ScreenManager.GetScreens())
                     screen.ExitScreen();
-                
+
+                CollisionManager.ClearAll();
                 ScreenManager.AddScreen(new BackgroundScreen());
                 ScreenManager.AddScreen(new MainMenuScreen());
             }
@@ -463,10 +475,26 @@ namespace PONG
         /// </summary>
         void CheckHits()
         {
-            //TODO: all this
+            CollisionManager.HandleCollisions();
         }
 
         #endregion
-        
+
+        #region Collision detection callbacks
+
+        public void BounceBallOffPaddle(PongObject param1, PongObject param2)
+        {
+            Ball b = (Ball)param1;
+            Paddle p = (Paddle)param2;
+            //TODO: incorporate spin and also whether or not we hit the rounded part
+            b.Velocity.Y = -b.Velocity.Y;
+        }
+
+        private void RegisterCallbackFunctions()
+        {
+            CollisionManager.RegisterCallback("Ball", "Paddle", BounceBallOffPaddle);
+        }
+
+        #endregion
     }
 }

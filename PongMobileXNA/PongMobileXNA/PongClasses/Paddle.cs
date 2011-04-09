@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using System.IO.IsolatedStorage;
+using PongClasses.PongShapes;
 
 namespace PongClasses
 {
@@ -18,7 +19,7 @@ namespace PongClasses
     /// <summary>
     /// Represents a Paddle
     /// </summary>
-    public abstract class Paddle
+    public abstract class Paddle : PongObject
     {
         public Paddle(Vector2 pos, Vector2 vel)
         {
@@ -38,13 +39,20 @@ namespace PongClasses
                 return Texture.Width;
             }
         }
-            
+
+        public override void UpdateShape()
+        {
+            int roundRadius = Texture.Height / 2;
+            shape = new RoundedRectangle(
+                new Coordinate((int)Position.X + roundRadius, (int)Position.Y),
+                Texture.Width, Texture.Height, 0);
+        }
     }
 
     public class DefaultPaddle : Paddle
     {
         public DefaultPaddle(Vector2 pos, Vector2 vel)
-            :base(pos,vel)
-        {}
+            : base(pos, vel)
+        { }
     }
 }
