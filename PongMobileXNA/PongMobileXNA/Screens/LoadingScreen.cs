@@ -21,6 +21,7 @@ namespace PONG
         void BackgroundLoadContent()
         {
             //Images
+            ScreenManager.Game.Content.Load<object>("Images/about");
             ScreenManager.Game.Content.Load<object>("Images/background");
             ScreenManager.Game.Content.Load<object>("Images/defaultTopPaddle");
             ScreenManager.Game.Content.Load<object>("Images/defaultBottomPaddle");
