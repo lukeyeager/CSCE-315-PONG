@@ -18,11 +18,11 @@ public static class CollisionManager
     {
         if (!Callbacks.ContainsKey(Type1))
         {
-            Callbacks.Add(Type1, new Dictionary<string, LinkedList<CollisionDelegate>>());
-            if (!Callbacks[Type1].ContainsKey(Type2))
-            {
-                Callbacks[Type1].Add(Type2, new LinkedList<CollisionDelegate>());
-            }
+            Callbacks.Add(Type1, new Dictionary<string, LinkedList<CollisionDelegate>>());   
+        }
+        if (!Callbacks[Type1].ContainsKey(Type2))
+        {
+            Callbacks[Type1].Add(Type2, new LinkedList<CollisionDelegate>());
         }
         Callbacks[Type1][Type2].AddLast(Callback);  
     }

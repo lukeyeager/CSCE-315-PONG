@@ -132,6 +132,14 @@ namespace PONG
             topPaddle.Position = new Vector2(((screenRightBound - screenLeftBound) / 2) - topPaddle.Width / 2, 0);
             topPaddle.UpdateShape();
 
+            DefaultWall w1 = new DefaultWall();
+            DefaultWall w2 = new DefaultWall();
+            w1.shape = new PongClasses.PongShapes.Rectangle(
+                new PongClasses.PongShapes.Coordinate(screenLeftBound, screenTopBound), 1, screenBottomBound - screenTopBound, Math.PI);
+            w2.shape = new PongClasses.PongShapes.Rectangle(
+                new PongClasses.PongShapes.Coordinate(screenRightBound, screenTopBound), 1, screenBottomBound - screenTopBound, 0);
+            CollisionManager.AddObject("Wall", w1);
+            CollisionManager.AddObject("Wall", w2);
             CollisionManager.AddObject("Paddle", bottomPaddle);
             CollisionManager.AddObject("Paddle", topPaddle);
             CollisionManager.AddObject("Ball", b);
@@ -185,15 +193,21 @@ namespace PONG
         /// <param name="elapsed"></param>
         void UpdateBalls(float elapsed)
         {
+            int activeBalls = 0;
             foreach (Ball ball in balls)
             {
                 if (ball.IsActive == false) //Ignore inactive balls
                     continue;
 
+                ++activeBalls;
                 ball.Update(elapsed);
 
-                if (ball.Position.Y < screenTopBound || ball.Position.Y > screenBottomBound)
+                if ((ball.Position.Y + ball.Texture.Height) < screenTopBound || ball.Position.Y > screenBottomBound)
+                {
+                    //mark as inactive and remove from list of shapes
                     ball.IsActive = false;
+                    CollisionManager.RemoveObject("Ball", ball);
+                }
 
                 //TODO: check for collide with left wall
                 if (ball.Position.X < screenLeftBound)
@@ -207,6 +221,11 @@ namespace PONG
                     ball.Velocity.X = -ball.Velocity.X;
                     particles.CreateDefaultCollisionEffect(new Vector2(ball.Position.X + ball.Diameter / 2, ball.Position.Y + ball.Diameter / 2));
                 }
+            }
+            if (activeBalls == 0)
+            {
+                //no active balls left, so Game Over
+
             }
         }
 
@@ -502,9 +521,18 @@ namespace PONG
             particles.CreateDefaultCollisionEffect(new Vector2(b.Position.X + b.Diameter / 2, b.Position.Y + b.Diameter / 2));
         }
 
+        public void BounceBallOffWall(PongObject param1, PongObject param2)
+        {
+            Ball b = (Ball)param1;
+            Wall w = (Wall)param2;
+            b.Velocity.X = -b.Velocity.X;
+            particles.CreateDefaultCollisionEffect(new Vector2(b.Position.X + b.Diameter / 2, b.Position.Y + b.Diameter / 2));
+        }
+
         private void RegisterCallbackFunctions()
         {
             CollisionManager.RegisterCallback("Ball", "Paddle", BounceBallOffPaddle);
+            CollisionManager.RegisterCallback("Ball", "Wall", BounceBallOffWall);
         }
 
         #endregion
