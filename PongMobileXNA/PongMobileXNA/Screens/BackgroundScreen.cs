@@ -43,7 +43,7 @@ namespace PONG
             spriteBatch.Draw(background, new Vector2(0, 0),
                  new Color(255, 255, 255, TransitionAlpha));
             // Draw Title
-            spriteBatch.Draw(title, new Vector2(60, 0),
+            spriteBatch.Draw(title, new Vector2(50, 0),
                  new Color(255, 255, 255, TransitionAlpha));
             spriteBatch.End();
         }

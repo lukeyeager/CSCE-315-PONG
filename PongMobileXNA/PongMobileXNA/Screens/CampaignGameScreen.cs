@@ -7,6 +7,8 @@ namespace PONG
 {
     public class CampaignGameScreen : PongGameScreen
     {
+        int errorAccumulate = 0;
+
         public override void UpdateTopPaddle(float elapsed)
         {
             HandleAI();
@@ -21,12 +23,16 @@ namespace PONG
         public void HandleAI()
         {
             int MAX_SPEED = 8;
+            Random error = new Random();
+            int errorNum = error.Next(-1, 1);
+
             float CenterOfPaddle = topPaddle.Position.X + (topPaddle.Texture.Width / 2);
-            float CenterOfBall = balls[0].Position.X + (balls[0].Texture.Width / 2);
+            float CenterOfBall = balls[0].Position.X + (balls[0].Texture.Width / 2) + errorAccumulate;
+
             //I want the paddle to pursue the ball once it's gone past
             //the screen's halfway point, before that the paddle will
             //just move to the center
-            if (balls[0].Position.Y < 400) //arbitrary, what's half the screen?
+            if (balls[0].Position.Y < 600) //arbitrary, what's half the screen?
             {
                 if (CenterOfPaddle > CenterOfBall) //is the ball on the right?
                 {
@@ -55,6 +61,7 @@ namespace PONG
                     topPaddle.Position.X -= 5;
                 if (topPaddle.Position.X < 240 - topPaddle.Texture.Width / 2)
                     topPaddle.Position.X += 5;
+                errorAccumulate += errorNum;
             }
         }
         #endregion

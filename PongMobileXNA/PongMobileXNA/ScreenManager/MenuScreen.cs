@@ -206,7 +206,7 @@ namespace PONG
                     position.X = /*120*/240 - font.MeasureString(menuEntry.Text).X /*/ 2*/;
                     menuEntry.Draw(this, position, isSelected, gameTime);
 
-                    position.Y -= menuEntry.GetHeight(this) + 90;
+                    position.Y -= menuEntry.GetHeight(this) + 80;
                 }
 
                 spriteBatch.End();
