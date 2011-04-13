@@ -7,7 +7,13 @@ namespace PONG
 {
     public class CampaignGameScreen : PongGameScreen
     {
+        #region Fields
+
         int errorAccumulate = 0;
+
+        #endregion
+
+        #region Update
 
         public override void UpdateTopPaddle(float elapsed)
         {
@@ -15,7 +21,10 @@ namespace PONG
             base.UpdateTopPaddle(elapsed);
         }
 
+        #endregion
+
         #region AI
+
         /// <summary>
         /// Handles movement of the top paddle in single player
         /// </summary>

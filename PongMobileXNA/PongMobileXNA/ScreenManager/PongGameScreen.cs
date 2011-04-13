@@ -31,7 +31,9 @@ namespace PONG
         public Texture2D defaultTopPaddleTexture;
         public Texture2D defaultBottomPaddleTexture;
 
+        //Misc Managers
         ParticleSystem particles;
+        PowerupManager powerups;
 
         //Sound Effects
         public SoundEffect hitWallSound;
@@ -106,8 +108,9 @@ namespace PONG
             //Load Sound Effects
             hitWallSound = ScreenManager.Game.Content.Load<SoundEffect>("Sounds/hitWall");
 
-            //Create ParticleSystem
+            //Initialize managers
             particles = new ParticleSystem(ScreenManager.Game.Content, ScreenManager.SpriteBatch);
+            powerups = new PowerupManager(this, ScreenManager.SpriteBatch);
 
             base.LoadContent();
 
@@ -178,12 +181,16 @@ namespace PONG
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            //Update Managers
+            particles.Update(elapsed);
+            powerups.Update(elapsed);
+
+            //Update paddles and balls
             UpdateBottomPaddle(elapsed);
             UpdateTopPaddle(elapsed);
-            //UpdateBottomPaddle(elapsed);
             UpdateBalls(elapsed);
             CheckHits();
-            particles.Update(elapsed);
+
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
         }
         

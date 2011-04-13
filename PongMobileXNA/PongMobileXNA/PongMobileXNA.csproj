@@ -89,6 +89,7 @@
     <Compile Include="Misc\AudioManager.cs" />
     <Compile Include="Misc\CollisionManager.cs" />
     <Compile Include="Misc\ParticleSystem.cs" />
+    <Compile Include="Misc\PowerupManager.cs" />
     <Compile Include="PongClasses\Ball.cs" />
     <Compile Include="PongClasses\Paddle.cs" />
     <Compile Include="PongClasses\PongObject.cs" />

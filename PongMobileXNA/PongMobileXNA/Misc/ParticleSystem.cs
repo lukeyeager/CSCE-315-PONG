@@ -40,9 +40,6 @@ namespace PONG
         Random random;
 
         Texture2D defaultCollisionEffect1;
-        Texture2D tank_top;
-        Texture2D fire;
-        Texture2D smoke;
 
         SpriteBatch spriteBatch;
 
