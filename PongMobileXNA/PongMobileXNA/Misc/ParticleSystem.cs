@@ -39,7 +39,7 @@ namespace PONG
     {
         Random random;
 
-        Texture2D defaultCollisionEffect1;
+        Texture2D defaultCollisionEffect;
 
         SpriteBatch spriteBatch;
 
@@ -53,7 +53,7 @@ namespace PONG
 
             this.spriteBatch = spriteBatch;
 
-            defaultCollisionEffect1 = content.Load<Texture2D>("Images/defaultCollisionEffect1");
+            defaultCollisionEffect1 = content.Load<Texture2D>("Images/defaultCollisionEffect");
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace PONG
         }
 
         /// <summary>
-        /// Creats a particle, preferring to reuse a dead one in the particles list 
+        /// Creates a particle, preferring to reuse a dead one in the particles list 
         /// before creating a new one.
         /// </summary>
         /// <returns></returns>
@@ -143,10 +143,10 @@ namespace PONG
                 p = CreateParticle();
                 p.Position = position;
                 p.RotationRate = 0f;
-                p.Scale = 0.5f;
+                p.Scale = 0.1f;
                 p.ScaleRate = 5.0f;// *(float)random.NextDouble();
                 p.Alpha = 2.0f;
-                p.AlphaRate = -1.0f;
+                p.AlphaRate = -10.0f;
                 p.Velocity.X = 0f;// -32.0f + 64.0f * (float)random.NextDouble();
                 p.Velocity.Y = 0f;//-32.0f + 64.0f * (float)random.NextDouble();
                 p.Texture = defaultCollisionEffect1;
