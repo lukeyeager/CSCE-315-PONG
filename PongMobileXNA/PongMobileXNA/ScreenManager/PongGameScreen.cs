@@ -34,6 +34,7 @@ namespace PONG
         //Misc Managers
         ParticleSystem particles;
         PowerupManager powerups;
+        AudioManager audio;
 
         //Sound Effects
         public SoundEffect hitWallSound;
@@ -526,6 +527,8 @@ namespace PONG
             //TODO: incorporate spin and also whether or not we hit the rounded part
             b.Velocity.Y = -b.Velocity.Y;
             particles.CreateDefaultCollisionEffect(new Vector2(b.Position.X + b.Diameter / 2, b.Position.Y + b.Diameter / 2));
+
+            //Sound pong or ping here
         }
 
         public void BounceBallOffWall(PongObject param1, PongObject param2)
@@ -534,6 +537,8 @@ namespace PONG
             Wall w = (Wall)param2;
             b.Velocity.X = -b.Velocity.X;
             particles.CreateDefaultCollisionEffect(new Vector2(b.Position.X + b.Diameter / 2, b.Position.Y + b.Diameter / 2));
+
+            //pew
         }
 
         private void RegisterCallbackFunctions()
