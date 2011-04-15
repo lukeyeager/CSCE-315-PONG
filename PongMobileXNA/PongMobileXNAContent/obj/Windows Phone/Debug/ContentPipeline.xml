@@ -26,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultBall.xnb</Output>
-      <Time>2011-04-12T19:07:07.654804-05:00</Time>
+      <Time>2011-04-14T16:28:19.514937-05:00</Time>
     </Item>
     <Item>
       <Source>Images\defaultBottomPaddle.png</Source>
@@ -36,69 +36,6 @@
       <Options>None</Options>
       <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultBottomPaddle.xnb</Output>
       <Time>2011-04-12T19:07:07.671787-05:00</Time>
-    </Item>
-    <Item>
-      <Source>Images\defaultCollisionEffect1.png</Source>
-      <Name>Images\defaultCollisionEffect1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect1.xnb</Output>
-      <Time>2011-04-12T19:07:07.676784-05:00</Time>
-    </Item>
-    <Item>
-      <Source>Images\defaultCollisionEffect2.png</Source>
-      <Name>Images\defaultCollisionEffect2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect2.xnb</Output>
-      <Time>2011-04-12T19:07:07.67878-05:00</Time>
-    </Item>
-    <Item>
-      <Source>Images\defaultCollisionEffect3.png</Source>
-      <Name>Images\defaultCollisionEffect3</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect3.xnb</Output>
-      <Time>2011-04-12T19:07:07.679782-05:00</Time>
-    </Item>
-    <Item>
-      <Source>Images\defaultCollisionEffect4.png</Source>
-      <Name>Images\defaultCollisionEffect4</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect4.xnb</Output>
-      <Time>2011-04-12T19:07:07.68178-05:00</Time>
-    </Item>
-    <Item>
-      <Source>Images\defaultCollisionEffect5.png</Source>
-      <Name>Images\defaultCollisionEffect5</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect5.xnb</Output>
-      <Time>2011-04-12T19:07:07.683775-05:00</Time>
-    </Item>
-    <Item>
-      <Source>Images\defaultCollisionEffect6.png</Source>
-      <Name>Images\defaultCollisionEffect6</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect6.xnb</Output>
-      <Time>2011-04-12T19:07:07.684776-05:00</Time>
-    </Item>
-    <Item>
-      <Source>Images\defaultCollisionEffect7.png</Source>
-      <Name>Images\defaultCollisionEffect7</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect7.xnb</Output>
-      <Time>2011-04-12T19:07:07.686771-05:00</Time>
     </Item>
     <Item>
       <Source>Images\defaultTopPaddle.png</Source>
@@ -117,6 +54,24 @@
       <Options>None</Options>
       <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\about.xnb</Output>
       <Time>2011-04-12T19:07:07.645813-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\defaultCollisionEffect.png</Source>
+      <Name>Images\defaultCollisionEffect</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultCollisionEffect.xnb</Output>
+      <Time>2011-04-14T16:31:38.383871-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Powerups\Multiball.png</Source>
+      <Name>Images\Powerups\Multiball</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\Powerups\Multiball.xnb</Output>
+      <Time>2011-04-15T13:56:05.0892635-05:00</Time>
     </Item>
     <Item>
       <Source>Fonts\gamefont.spritefont</Source>
@@ -163,6 +118,24 @@
       <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Sounds\hitWall.xnb</Output>
       <Time>2011-04-12T19:07:07.799659-05:00</Time>
     </Item>
+    <Item>
+      <Source>Images\Powerups\Bubble.png</Source>
+      <Name>Images\Powerups\Bubble</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\Powerups\Bubble.xnb</Output>
+      <Time>2011-04-14T16:31:38.383871-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Powerups\Fastball.png</Source>
+      <Name>Images\Powerups\Fastball</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\Powerups\Fastball.xnb</Output>
+      <Time>2011-04-15T18:16:29.9368583-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>WindowsPhone</TargetPlatform>
@@ -201,7 +174,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2011-02-11T13:03:09.1442297-06:00</Value>
+        <Value>2011-02-11T13:05:41.0250264-06:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

@@ -27,14 +27,14 @@ namespace PONG
 
         //Textures (images)
         public Texture2D backgroundTexture;
-        public Texture2D defaultBallTexture;
         public Texture2D defaultTopPaddleTexture;
         public Texture2D defaultBottomPaddleTexture;
 
         //Misc Managers
-        ParticleSystem particles;
-        PowerupManager powerups;
-        AudioManager audio;
+        public ParticleSystem particles;
+        public PowerupManager powerups;
+        public BallManager ballManager;
+        public AudioManager audio;
 
         //Sound Effects
         public SoundEffect hitWallSound;
@@ -49,7 +49,6 @@ namespace PONG
         public float lastAccelInput;
 
         //Data Members
-        public List<Ball> balls;
         public Paddle topPaddle;
         public Paddle bottomPaddle;
 
@@ -93,7 +92,6 @@ namespace PONG
             lastTouchInput = new List<TouchLocation>();
             lastKeyInput = new List<Keys>();
 
-            balls = new List<Ball>();
             bottomPaddle = new DefaultPaddle();
             topPaddle = new DefaultPaddle();
         }
@@ -103,15 +101,15 @@ namespace PONG
             //Load Textures
             defaultTopPaddleTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/defaultTopPaddle");
             defaultBottomPaddleTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/defaultBottomPaddle");
-            defaultBallTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/defaultBall");
             backgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/background");
 
             //Load Sound Effects
             hitWallSound = ScreenManager.Game.Content.Load<SoundEffect>("Sounds/hitWall");
 
             //Initialize managers
+            ballManager = new BallManager(ScreenManager.Game.Content, this, ScreenManager.SpriteBatch);
             particles = new ParticleSystem(ScreenManager.Game.Content, ScreenManager.SpriteBatch);
-            powerups = new PowerupManager(this, ScreenManager.SpriteBatch);
+            powerups = new PowerupManager(ScreenManager.Game.Content, this, ScreenManager.SpriteBatch);
 
             base.LoadContent();
 
@@ -123,15 +121,12 @@ namespace PONG
         /// </summary>
         public virtual void Start()
         {
-            DefaultBall b = CreateBall();
-            b.Position = new Vector2(240, 400);
-            b.Velocity = new Vector2(200, 200);
-            b.IsActive = true;
-            b.UpdateShape();
-            b.spin = 0;
+            Ball b = ballManager.CreateDefaultBall(new Vector2(240, 400), new Vector2(200, 200));
+
             bottomPaddle.Texture = defaultBottomPaddleTexture;
             bottomPaddle.Position = new Vector2(((screenRightBound - screenLeftBound) / 2) - bottomPaddle.Width / 2, screenBottomBound - (bottomPaddle.Height + paddleTouchBufferSize));
             bottomPaddle.UpdateShape();
+
             topPaddle.Texture = defaultTopPaddleTexture;
             topPaddle.Position = new Vector2(((screenRightBound - screenLeftBound) / 2) - topPaddle.Width / 2, 0);
             topPaddle.UpdateShape();
@@ -189,52 +184,10 @@ namespace PONG
             //Update paddles and balls
             UpdateBottomPaddle(elapsed);
             UpdateTopPaddle(elapsed);
-            UpdateBalls(elapsed);
+            ballManager.Update(elapsed);
             CheckHits();
 
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
-        }
-        
-        /// <summary>
-        /// Moves all of the balls
-        /// </summary>
-        /// <param name="elapsed"></param>
-        void UpdateBalls(float elapsed)
-        {
-            int activeBalls = 0;
-            foreach (Ball ball in balls)
-            {
-                if (ball.IsActive == false) //Ignore inactive balls
-                    continue;
-
-                ++activeBalls;
-                ball.Update(elapsed);
-
-                if ((ball.Position.Y + ball.Texture.Height) < screenTopBound || ball.Position.Y > screenBottomBound)
-                {
-                    //mark as inactive and remove from list of shapes
-                    ball.IsActive = false;
-                    CollisionManager.RemoveObject("Ball", ball);
-                }
-
-                //TODO: check for collide with left wall
-                if (ball.Position.X < screenLeftBound)
-                {
-                    ball.Velocity.X = -ball.Velocity.X;
-                    particles.CreateDefaultCollisionEffect(new Vector2(ball.Position.X + ball.Diameter / 2, ball.Position.Y + ball.Diameter / 2));
-                }
-                //TODO: check for collide with right wall
-                else if (ball.Position.X + ball.Texture.Width > screenRightBound)
-                {
-                    ball.Velocity.X = -ball.Velocity.X;
-                    particles.CreateDefaultCollisionEffect(new Vector2(ball.Position.X + ball.Diameter / 2, ball.Position.Y + ball.Diameter / 2));
-                }
-            }
-            if (activeBalls == 0)
-            {
-                //no active balls left, so Game Over
-
-            }
         }
 
         /// <summary>
@@ -324,8 +277,8 @@ namespace PONG
             DrawBottomPaddle();
             DrawTopPaddle();
             particles.Draw();
-            DrawBalls();
-            //DrawHud();
+            powerups.Draw();
+            ballManager.Draw();
             ScreenManager.SpriteBatch.End();
         }
 
@@ -351,17 +304,6 @@ namespace PONG
         void DrawTopPaddle()
         {
             ScreenManager.SpriteBatch.Draw(topPaddle.Texture, topPaddle.Position, Color.White);
-        }
-
-        /// <summary>
-        /// Draws all of the balls
-        /// </summary>
-        void DrawBalls()
-        {
-            for (int i = 0; i < balls.Count; ++i)
-            {
-                ScreenManager.SpriteBatch.Draw(balls[i].Texture, balls[i].Position, Color.White);
-            }
         }
 
         /// <summary>
@@ -493,19 +435,7 @@ namespace PONG
         }
         #endregion
 
-        #region Private functions
-
-        /// <summary>
-        /// Returns an instance of a ball
-        /// </summary>
-        /// <returns>A ball ready to place into the world.</returns>
-        DefaultBall CreateBall()
-        {
-            DefaultBall b = new DefaultBall();
-            b.Texture = defaultBallTexture;
-            balls.Add(b);
-            return b;
-        }
+        #region Other Functions
 
         /// <summary>
         /// Performs all ball collision detection.  Also handles game logic

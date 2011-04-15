@@ -53,7 +53,7 @@ namespace PONG
 
             this.spriteBatch = spriteBatch;
 
-            defaultCollisionEffect1 = content.Load<Texture2D>("Images/defaultCollisionEffect");
+            defaultCollisionEffect = content.Load<Texture2D>("Images/defaultCollisionEffect");
         }
 
         /// <summary>
@@ -145,11 +145,11 @@ namespace PONG
                 p.RotationRate = 0f;
                 p.Scale = 0.1f;
                 p.ScaleRate = 5.0f;// *(float)random.NextDouble();
-                p.Alpha = 2.0f;
-                p.AlphaRate = -10.0f;
+                p.Alpha = 1f;
+                p.AlphaRate = 0f;
                 p.Velocity.X = 0f;// -32.0f + 64.0f * (float)random.NextDouble();
                 p.Velocity.Y = 0f;//-32.0f + 64.0f * (float)random.NextDouble();
-                p.Texture = defaultCollisionEffect1;
+                p.Texture = defaultCollisionEffect;
                 p.Life = 0.2f;
             }
         }

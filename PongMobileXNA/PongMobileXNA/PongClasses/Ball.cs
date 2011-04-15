@@ -13,10 +13,11 @@ namespace PongClasses
     /// <summary>
     /// Represents a Pong ball
     /// </summary>
-    public abstract class Ball : PongObject
+    public class Ball : PongObject
     {
         public Vector2 Position;
         public Vector2 Velocity;
+        public float spin;
         public Texture2D Texture;
         public bool IsActive;
 
@@ -39,9 +40,5 @@ namespace PongClasses
                 return Texture.Width;
             }
         }
-    }
-    class DefaultBall : Ball
-    {
-        public float spin;
     }
 }

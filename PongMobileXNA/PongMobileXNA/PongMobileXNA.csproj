@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Misc\AudioManager.cs" />
+    <Compile Include="Misc\BallManager.cs" />
     <Compile Include="Misc\CollisionManager.cs" />
     <Compile Include="Misc\ParticleSystem.cs" />
     <Compile Include="Misc\PowerupManager.cs" />

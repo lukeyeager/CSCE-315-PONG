@@ -96,41 +96,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Images\defaultCollisionEffect1.png">
-      <Name>defaultCollisionEffect1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Images\defaultCollisionEffect2.png">
-      <Name>defaultCollisionEffect2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Images\defaultCollisionEffect3.png">
-      <Name>defaultCollisionEffect3</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Images\defaultCollisionEffect4.png">
-      <Name>defaultCollisionEffect4</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Images\defaultCollisionEffect5.png">
-      <Name>defaultCollisionEffect5</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Images\defaultCollisionEffect6.png">
-      <Name>defaultCollisionEffect6</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Images\defaultCollisionEffect7.png">
-      <Name>defaultCollisionEffect7</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Images\defaultTopPaddle.png">
       <Name>defaultTopPaddle</Name>
       <Importer>TextureImporter</Importer>
@@ -140,6 +105,34 @@
   <ItemGroup>
     <Compile Include="Images\about.png">
       <Name>about</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\defaultCollisionEffect.png">
+      <Name>defaultCollisionEffect</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\Powerups\Multiball.png">
+      <Name>Multiball</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\Powerups\Bubble.png">
+      <Name>Bubble</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\Powerups\Fastball.png">
+      <Name>Fastball</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

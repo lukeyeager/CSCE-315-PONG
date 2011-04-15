@@ -13,6 +13,18 @@ namespace PONG
 
         #endregion
 
+        #region Initialization
+
+        public override void Start()
+        {
+            base.Start();
+
+            powerups.CreatePowerupFastball();
+            powerups.CreatePowerupMultiball();
+        }
+
+        #endregion
+
         #region Update
 
         public override void UpdateTopPaddle(float elapsed)
@@ -36,12 +48,12 @@ namespace PONG
             int errorNum = error.Next(-1, 1);
 
             float CenterOfPaddle = topPaddle.Position.X + (topPaddle.Texture.Width / 2);
-            float CenterOfBall = balls[0].Position.X + (balls[0].Texture.Width / 2) + errorAccumulate;
+            float CenterOfBall = ballManager.balls[0].Position.X + (ballManager.balls[0].Texture.Width / 2) + errorAccumulate;
 
             //I want the paddle to pursue the ball once it's gone past
             //the screen's halfway point, before that the paddle will
             //just move to the center
-            if (balls[0].Position.Y < 600) //arbitrary, what's half the screen?
+            if (ballManager.balls[0].Position.Y < 600) //arbitrary, what's half the screen?
             {
                 if (CenterOfPaddle > CenterOfBall) //is the ball on the right?
                 {
