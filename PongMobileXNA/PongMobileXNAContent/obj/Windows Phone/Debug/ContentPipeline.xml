@@ -20,15 +20,6 @@
       <Time>2011-04-12T19:07:07.689769-05:00</Time>
     </Item>
     <Item>
-      <Source>Images\defaultBall.png</Source>
-      <Name>Images\defaultBall</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultBall.xnb</Output>
-      <Time>2011-04-14T16:28:19.514937-05:00</Time>
-    </Item>
-    <Item>
       <Source>Images\defaultBottomPaddle.png</Source>
       <Name>Images\defaultBottomPaddle</Name>
       <Importer>TextureImporter</Importer>
@@ -65,13 +56,67 @@
       <Time>2011-04-14T16:31:38.383871-05:00</Time>
     </Item>
     <Item>
+      <Source>Images\defaultBall35px.png</Source>
+      <Name>Images\defaultBall35px</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\defaultBall35px.xnb</Output>
+      <Time>2011-04-15T20:03:37.346628-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Powerups\BlueBubble.png</Source>
+      <Name>Images\Powerups\BlueBubble</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\Powerups\BlueBubble.xnb</Output>
+      <Time>2011-04-15T19:10:53.76191-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Powerups\Bubble.png</Source>
+      <Name>Images\Powerups\Bubble</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\Powerups\Bubble.xnb</Output>
+      <Time>2011-04-14T16:31:38.383871-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Powerups\Fastball.png</Source>
+      <Name>Images\Powerups\Fastball</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\Powerups\Fastball.xnb</Output>
+      <Time>2011-04-15T19:45:12.53408-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Powerups\GreenBubble.png</Source>
+      <Name>Images\Powerups\GreenBubble</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\Powerups\GreenBubble.xnb</Output>
+      <Time>2011-04-15T19:12:54.993557-05:00</Time>
+    </Item>
+    <Item>
       <Source>Images\Powerups\Multiball.png</Source>
       <Name>Images\Powerups\Multiball</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\Powerups\Multiball.xnb</Output>
-      <Time>2011-04-15T13:56:05.0892635-05:00</Time>
+      <Time>2011-04-15T19:45:31.177416-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\Powerups\RedBubble.png</Source>
+      <Name>Images\Powerups\RedBubble</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\Powerups\RedBubble.xnb</Output>
+      <Time>2011-04-15T19:13:50.230265-05:00</Time>
     </Item>
     <Item>
       <Source>Fonts\gamefont.spritefont</Source>
@@ -118,24 +163,6 @@
       <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Sounds\hitWall.xnb</Output>
       <Time>2011-04-12T19:07:07.799659-05:00</Time>
     </Item>
-    <Item>
-      <Source>Images\Powerups\Bubble.png</Source>
-      <Name>Images\Powerups\Bubble</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\Powerups\Bubble.xnb</Output>
-      <Time>2011-04-14T16:31:38.383871-05:00</Time>
-    </Item>
-    <Item>
-      <Source>Images\Powerups\Fastball.png</Source>
-      <Name>Images\Powerups\Fastball</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>H:\315\pong\PongMobileXNA\PongMobileXNA\bin\Windows Phone\Debug\Content\Images\Powerups\Fastball.xnb</Output>
-      <Time>2011-04-15T18:16:29.9368583-05:00</Time>
-    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>WindowsPhone</TargetPlatform>
@@ -150,31 +177,31 @@
     <Assemblies>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-05:00</Value>
+        <Value>2010-08-23T12:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
-        <Value>2010-08-23T13:41:18-05:00</Value>
+        <Value>2010-08-23T12:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-05:00</Value>
+        <Value>2010-08-23T12:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-05:00</Value>
+        <Value>2010-08-23T12:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-05:00</Value>
+        <Value>2010-08-23T12:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2010-08-23T13:41:18-05:00</Value>
+        <Value>2010-08-23T12:41:18-05:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2011-02-11T13:05:41.0250264-06:00</Value>
+        <Value>2011-03-19T07:30:05.2643533-05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

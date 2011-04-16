@@ -133,25 +133,37 @@ namespace PONG
         /// Creates the default effect for a ball collision
         /// </summary>
         /// <param name="position">Where on the screen to create the effect.</param>
-        /// <param name="texture">What texture to display.</param>
         public void CreateDefaultCollisionEffect(Vector2 position)
         {
-            Particle p = null;
-
-            for (int i = 0; i < 1; ++i)
-            {
-                p = CreateParticle();
-                p.Position = position;
-                p.RotationRate = 0f;
-                p.Scale = 0.1f;
-                p.ScaleRate = 5.0f;// *(float)random.NextDouble();
-                p.Alpha = 1f;
-                p.AlphaRate = 0f;
-                p.Velocity.X = 0f;// -32.0f + 64.0f * (float)random.NextDouble();
-                p.Velocity.Y = 0f;//-32.0f + 64.0f * (float)random.NextDouble();
-                p.Texture = defaultCollisionEffect;
-                p.Life = 0.2f;
-            }
+            Particle p = CreateParticle();
+            p.Position = position;
+            p.RotationRate = 0f;
+            p.Scale = 0.1f;
+            p.ScaleRate = 5.0f;
+            p.Alpha = 1f;
+            p.AlphaRate = 0f;
+            p.Velocity.X = 0f;
+            p.Velocity.Y = 0f;
+            p.Texture = defaultCollisionEffect;
+            p.Life = 0.2f;
+        }
+        /// <summary>
+        /// Creates the effect for a PowerupBubble popping
+        /// </summary>
+        /// <param name="position">Where on the screen to create the effect.</param>
+        public void CreateBubblePopEffect(Vector2 position)
+        {
+            Particle p = CreateParticle();
+            p.Position = position;
+            p.RotationRate = 0f;
+            p.Scale = 0.1f;
+            p.ScaleRate = 5.0f;
+            p.Alpha = 1f;
+            p.AlphaRate = 0f;
+            p.Velocity.X = 0f;
+            p.Velocity.Y = 0f;
+            p.Texture = defaultCollisionEffect;
+            p.Life = 0.2f;
         }
     }
 

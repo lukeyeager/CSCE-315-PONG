@@ -25,12 +25,15 @@ namespace PONG
             ScreenManager.Game.Content.Load<object>("Images/background");
             ScreenManager.Game.Content.Load<object>("Images/defaultTopPaddle");
             ScreenManager.Game.Content.Load<object>("Images/defaultBottomPaddle");
-            ScreenManager.Game.Content.Load<object>("Images/defaultBall");
+            ScreenManager.Game.Content.Load<object>("Images/defaultBall35px");
             //ScreenManager.Game.Content.Load<object>("Images/fastBall");
             ScreenManager.Game.Content.Load<object>("Images/title");
             ScreenManager.Game.Content.Load<object>("Images/defaultCollisionEffect");
 
             ScreenManager.Game.Content.Load<object>("Images/Powerups/Bubble");
+            ScreenManager.Game.Content.Load<object>("Images/Powerups/BlueBubble");
+            ScreenManager.Game.Content.Load<object>("Images/Powerups/GreenBubble");
+            ScreenManager.Game.Content.Load<object>("Images/Powerups/RedBubble");
             ScreenManager.Game.Content.Load<object>("Images/Powerups/Fastball");
             ScreenManager.Game.Content.Load<object>("Images/Powerups/Multiball");
 

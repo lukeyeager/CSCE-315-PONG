@@ -84,13 +84,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Images\defaultBall.png">
-      <Name>defaultBall</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Images\defaultBottomPaddle.png">
       <Name>defaultBottomPaddle</Name>
       <Importer>TextureImporter</Importer>
@@ -117,22 +110,41 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Images\Powerups\Multiball.png">
-      <Name>Multiball</Name>
+    <Compile Include="Images\defaultBall35px.png">
+      <Name>defaultBall35px</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
+    <Compile Include="Images\Powerups\BlueBubble.png">
+      <Name>BlueBubble</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Images\Powerups\Bubble.png">
       <Name>Bubble</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Images\Powerups\Fastball.png">
       <Name>Fastball</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\Powerups\GreenBubble.png">
+      <Name>GreenBubble</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\Powerups\Multiball.png">
+      <Name>Multiball</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\Powerups\RedBubble.png">
+      <Name>RedBubble</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

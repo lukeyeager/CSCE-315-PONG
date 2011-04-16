@@ -99,6 +99,7 @@
     <Compile Include="PongClasses\PongShapes\Line.cs" />
     <Compile Include="PongClasses\PongShapes\Rectangle.cs" />
     <Compile Include="PongClasses\PongShapes\RoundedRectangle.cs" />
+    <Compile Include="PongClasses\PowerupBubble.cs" />
     <Compile Include="PongClasses\Wall.cs" />
     <Compile Include="ScreenManager\AboutScreen.cs" />
     <Compile Include="Screens\CampaignGameScreen.cs" />

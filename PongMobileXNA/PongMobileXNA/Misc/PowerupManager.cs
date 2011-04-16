@@ -19,13 +19,14 @@ namespace PONG
         //Textures
         public Texture2D multiPupTexture;
         public Texture2D fastPupTexture;
-        public Texture2D PowerupBubbleTexture;
+        public Texture2D blueBubbleTexture;
+        public Texture2D greenBubbleTexture;
 
         Random random;
         SpriteBatch spriteBatch;
         List<PowerupBubble> bubbles;
+        List<Powerup> activePowerups;
         PongGameScreen screen;
-        BallManager ballManager;
 
         #endregion
 
@@ -35,10 +36,12 @@ namespace PONG
         {
             multiPupTexture = content.Load<Texture2D>("Images/Powerups/Multiball");
             fastPupTexture = content.Load<Texture2D>("Images/Powerups/Fastball");
-            PowerupBubbleTexture = content.Load<Texture2D>("Images/Powerups/Bubble");
+            blueBubbleTexture = content.Load<Texture2D>("Images/Powerups/BlueBubble");
+            greenBubbleTexture = content.Load<Texture2D>("Images/Powerups/GreenBubble");
 
             random = new Random();
             bubbles = new List<PowerupBubble>();
+            activePowerups = new List<Powerup>();
 
             this.screen = screen;
             this.spriteBatch = spriteBatch;
@@ -49,42 +52,61 @@ namespace PONG
         #region Update
 
         /// <summary>
-        /// Update all active particles.
+        /// Update all active bubbles and powerups
         /// </summary>
         /// <param name="elapsed">The amount of time elapsed since last Update.</param>
         public void Update(float elapsed)
         {
-            foreach (PowerupBubble bubble in bubbles)
+            foreach (Powerup p in activePowerups)
             {
-                if (bubble.IsActive)
+                p.LifeTime -= elapsed;
+                if (p.LifeTime <= 0.0f)
                 {
-                    bubble.LifeTime -= elapsed;
-                    if (bubble.LifeTime <= 0.0f)
+                    p.Deactivate(); //Hopefully this won't screw things up with multiple powerups running
+                    break;  //It did, so for now we just fix one at a time
+                }
+            }
+
+            int numActive = 0;
+            foreach (PowerupBubble b in bubbles)
+            {
+                if (b.IsActive)
+                {
+                    b.Update(elapsed, random);
+                    if (!b.IsActive)
                     {
-                        bubble.IsActive = false;
+                        if (b.IsTracked)
+                        {
+                            CollisionManager.RemoveObject("Bubble", b);
+                            b.IsTracked = false;
+                        }
                         continue;
                     }
-                    //Create some random fluctuation in velocity
-
-                    double angle = 2 * Math.PI * random.NextDouble();
-                    bubble.Velocity += new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
-
-                    bubble.Position += bubble.Velocity * elapsed;
-                    if (bubble.Position.X < screen.screenLeftBound)
+                    if (!b.IsTracked)
                     {
-                        bubble.Position.X = screen.screenLeftBound;
-                        bubble.Velocity.X *= -1;
+                        CollisionManager.AddObject("Bubble", b);
+                        b.IsTracked = true;
                     }
-                    else if (bubble.Position.Y + bubble.Width > screen.screenRightBound)
+                    ++numActive;
+
+                    if (b.Position.X < screen.screenLeftBound)
                     {
-                        bubble.Position.X = screen.screenRightBound - bubble.Width;
-                        bubble.Velocity.X *= -1;
+                        b.Position.X = screen.screenLeftBound;
+                        b.Velocity.X *= -1;
+                    }
+                    else if (b.Position.Y + b.Diameter > screen.screenRightBound)
+                    {
+                        b.Position.X = screen.screenRightBound - b.Diameter;
+                        b.Velocity.X *= -1;
                     }
                     //TODO: handle hitting top and bottom
 
-                    bubble.powerup.Rotation += bubble.powerup.Spin * elapsed;
-                    bubble.powerup.Position = bubble.Position + new Vector2(40, 40);
                 }
+            }
+
+            if (0 == numActive)
+            {
+                CreatePowerupFastball();
             }
         }
 
@@ -97,13 +119,15 @@ namespace PONG
         /// </summary>
         public void Draw()
         {
-            foreach (PowerupBubble bubble in bubbles)
+            foreach (PowerupBubble b in bubbles)
             {
-                if (!bubble.IsActive)
+                if (!b.IsActive)
                     continue;
-                spriteBatch.Draw(bubble.Texture, bubble.Position, Color.White);
-                Powerup p = bubble.powerup;
-                spriteBatch.Draw(p.Texture, p.Position, null, Color.White, p.Rotation, new Vector2(p.Texture.Width / 2, p.Texture.Height / 2), 1, SpriteEffects.None, 0.0f);
+                //Draw bubble
+                spriteBatch.Draw(b.Texture, b.Position, Color.White);
+                //Draw powerup icon
+                spriteBatch.Draw(b.P_Texture, b.P_Position, null, Color.White, b.P_Rotation, 
+                    new Vector2(b.P_Texture.Width / 2, b.P_Texture.Height / 2), 1, SpriteEffects.None, 0.0f);
             }
         }
 
@@ -137,7 +161,16 @@ namespace PONG
                 bubbles.Add(b);
             }
 
+            b.Position = CreateBubblePosition();
             return b;
+        }
+
+        public Vector2 CreateBubblePosition()
+        {
+            Int32 x = random.Next(screen.screenRightBound - screen.screenLeftBound);
+            Int32 y = random.Next((screen.screenBottomBound - screen.screenTopBound) / 2);
+
+            return new Vector2(x, y);
         }
 
         #endregion
@@ -145,44 +178,28 @@ namespace PONG
         #region Classes
 
         /// <summary>
-        /// A class to represent powerups on the screen that haven't been activated yet.
-        /// </summary>
-        /// <remarks>
-        /// They look like bubbles, so we're calling them PowerupBubbles
-        /// </remarks>
-        class PowerupBubble
-        {
-            public Powerup powerup;
-            public bool IsActive;
-            public float LifeTime;
-            public Vector2 Position;
-            public Vector2 Velocity;
-            public Texture2D Texture;
-            public Int32 Width
-            {
-                get { return Texture.Width; }
-            }
-            public Int32 Height
-            {
-                get { return Texture.Height; }
-            }
-        }
-
-        /// <summary>
         /// An abstract class for defining powerups.
         /// </summary>
         public class Powerup
         {
+            public Powerup()
+            {
+                LifeTime = 25.0f;
+            }
+
             public float LifeTime;
+
+            public void Activate()
+            {
+                OnActivate(this, EventArgs.Empty);
+            }
+            public void Deactivate()
+            {
+                OnDeactivate(this, EventArgs.Empty);
+            }
+
             public event EventHandler<EventArgs> OnActivate;
             public event EventHandler<EventArgs> OnDeactivate;
-
-            //Attibutes while powerup is within a bubble
-            public Vector2 Position;
-            public Vector2 Velocity;
-            public Texture2D Texture;
-            public float Rotation;
-            public float Spin;
         }
         
         #endregion
@@ -191,24 +208,19 @@ namespace PONG
 
         public void CreatePowerupMultiball()
         {
-            PowerupBubble b = new PowerupBubble();
-            b.IsActive = true;
-            b.LifeTime = 100;
-            b.Position = new Vector2(240, 400);
-            b.Velocity = new Vector2(0, 0);
-            b.Texture = PowerupBubbleTexture;
+            PowerupBubble b = CreateBubble();
+            b.Texture = blueBubbleTexture;
 
             Powerup p = new Powerup();
-            p.LifeTime = 10;
-            p.Position = new Vector2(250, 410);
-            p.Velocity = new Vector2(0, 0);
-            p.Texture = multiPupTexture;
-            p.Rotation = 0f;
-            p.Spin = 1.0f;
+            b.P_Position = new Vector2(250, 410);
+            b.P_Velocity = new Vector2(0, 0);
+            b.P_Texture = multiPupTexture;
+            b.P_Rotation = 0f;
+            b.P_Spin = 1.0f;
             p.OnActivate += ActivatePowerupMultiball;
             p.OnDeactivate += DectivatePowerupMultiball;
             b.powerup = p;
-            
+
             bubbles.Add(b);
         }
 
@@ -218,13 +230,15 @@ namespace PONG
         /// </summary>
         void ActivatePowerupMultiball(object sender, EventArgs e)
         {
-            Ball b = ballManager.CreateMultiBall();
+            Ball b = screen.ballManager.CreateMultiBall();
             b.Position = new Vector2(240, 400);
             b.Velocity = new Vector2(200, 200);
 
-            b = ballManager.CreateMultiBall();
+            b = screen.ballManager.CreateMultiBall();
             b.Position = new Vector2(240, 400);
             b.Velocity = new Vector2(-200, -200);
+
+            activePowerups.Add((Powerup)sender);
         }
 
 
@@ -233,6 +247,7 @@ namespace PONG
         /// </summary>
         void DectivatePowerupMultiball(object sender, EventArgs e)
         {
+            activePowerups.Remove((Powerup)sender);
         }
 
         #endregion
@@ -241,20 +256,15 @@ namespace PONG
 
         public void CreatePowerupFastball()
         {
-            PowerupBubble b = new PowerupBubble();
-            b.IsActive = true;
-            b.LifeTime = 100;
-            b.Position = new Vector2(240, 400);
-            b.Velocity = new Vector2(0, 0);
-            b.Texture = PowerupBubbleTexture;
+            PowerupBubble b = CreateBubble();
+            b.Texture = greenBubbleTexture;
 
             Powerup p = new Powerup();
-            p.LifeTime = 10;
-            p.Position = new Vector2(250, 410);
-            p.Velocity = new Vector2(0, 0);
-            p.Texture = fastPupTexture;
-            p.Rotation = 0f;
-            p.Spin = 1.0f;
+            b.P_Position = new Vector2(250, 410);
+            b.P_Velocity = new Vector2(0, 0);
+            b.P_Texture = fastPupTexture;
+            b.P_Rotation = 0f;
+            b.P_Spin = 1.0f;
             p.OnActivate += ActivatePowerupFastball;
             p.OnDeactivate += DectivatePowerupFastball;
             b.powerup = p;
@@ -267,16 +277,13 @@ namespace PONG
         /// </summary>
         void ActivatePowerupFastball(object sender, EventArgs e)
         {
-            foreach (Ball b in ballManager.balls)
+            foreach (Ball b in screen.ballManager.balls)
             {
-                Ball new_ball = ballManager.CreateFastBall();
-                new_ball.Position = b.Position;
-                new_ball.Velocity = b.Velocity * 2;
-                new_ball.spin = b.spin;
-                new_ball.IsActive = true;
-
-                b.IsActive = false;
+                if (b.MaxSpeed == 1.0f)
+                    b.MaxSpeed = 2.0f;
             }
+
+            activePowerups.Add((Powerup)sender);
         }
 
         /// <summary>
@@ -284,16 +291,13 @@ namespace PONG
         /// </summary>
         void DectivatePowerupFastball(object sender, EventArgs e)
         {
-            foreach (Ball b in ballManager.balls)
+            foreach (Ball b in screen.ballManager.balls)
             {
-                Ball new_ball = ballManager.CreateDefaultBall();
-                new_ball.Position = b.Position;
-                new_ball.Velocity = b.Velocity / 2;
-                new_ball.spin = b.spin;
-                new_ball.IsActive = true;
-
-                b.IsActive = false;
+                if (b.MaxSpeed == 2.0f)
+                    b.MaxSpeed = 1.0f;
             }
+
+            activePowerups.Remove((Powerup)sender);
         }
 
         #endregion

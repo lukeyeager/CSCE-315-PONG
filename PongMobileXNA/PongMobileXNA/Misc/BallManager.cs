@@ -37,7 +37,7 @@ namespace PONG
 
         public BallManager(ContentManager content, PongGameScreen screen, SpriteBatch spriteBatch)
         {
-            defaultBallTexture = content.Load<Texture2D>("Images/defaultBall");
+            defaultBallTexture = content.Load<Texture2D>("Images/defaultBall35px");
             //fastBallTexture = content.Load<Texture2D>("Images/fastBall");
 
             balls = new List<Ball>();
@@ -54,22 +54,22 @@ namespace PONG
         /// Update all active balls.
         /// </summary>
         /// <param name="elapsed">The amount of time elapsed since last Update.</param>
-        public void Update(float elapsed)
+        public int Update(float elapsed)
         {
             int activeBalls = 0;
             foreach (Ball ball in balls)
             {
+                ball.Update(elapsed);
+
                 if (ball.IsActive == false) //Ignore inactive balls
                     continue;
 
                 ++activeBalls;
-                ball.Update(elapsed);
 
                 if ((ball.Position.Y + ball.Texture.Height) < screen.screenTopBound || ball.Position.Y > screen.screenBottomBound)
                 {
                     //mark as inactive and remove from list of shapes
                     ball.IsActive = false;
-                    CollisionManager.RemoveObject("Ball", ball);
                 }
 
                 //TODO: check for collide with left wall
@@ -85,10 +85,8 @@ namespace PONG
                     screen.particles.CreateDefaultCollisionEffect(new Vector2(ball.Position.X + ball.Diameter / 2, ball.Position.Y + ball.Diameter / 2));
                 }
             }
-            if (activeBalls == 0)
-            {
-                //no active balls left, so Game Over
-            }
+
+            return activeBalls;
         }
 
         #endregion
@@ -103,7 +101,9 @@ namespace PONG
             foreach (Ball b in balls)
             {
                 if (b.IsActive)
-                    spriteBatch.Draw(b.Texture, b.Position, Color.White);
+                {
+                    spriteBatch.Draw(b.Texture, b.Position, null, Color.White, b.Rotation, new Vector2(b.Radius, b.Radius), 1, SpriteEffects.None, 0.0f);
+                }
             }
         }
 
@@ -138,7 +138,8 @@ namespace PONG
             b.IsActive = true;
             b.Position = position;
             b.Velocity = velocity;
-            b.spin = 0;
+            b.MaxSpeed = 1.0f;
+            b.Spin = 0f;
             b.Texture = texture;
             b.UpdateShape();
 
@@ -190,7 +191,7 @@ namespace PONG
         {
             Ball b = CreateDefaultBall();
             b.Texture = fastBallTexture;
-            b.Velocity *= 2;
+            b.MaxSpeed = 2.0f;
             return b;
         }
 

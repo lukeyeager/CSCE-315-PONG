@@ -141,7 +141,6 @@ namespace PONG
             CollisionManager.AddObject("Wall", w2);
             CollisionManager.AddObject("Paddle", bottomPaddle);
             CollisionManager.AddObject("Paddle", topPaddle);
-            CollisionManager.AddObject("Ball", b);
             RegisterCallbackFunctions();
         }
 
@@ -184,7 +183,16 @@ namespace PONG
             //Update paddles and balls
             UpdateBottomPaddle(elapsed);
             UpdateTopPaddle(elapsed);
-            ballManager.Update(elapsed);
+            if (0 == ballManager.Update(elapsed))
+            {
+                foreach (GameScreen screen in ScreenManager.GetScreens())
+                    screen.ExitScreen();
+
+                //TODO: add game over screen
+                CollisionManager.ClearAll();
+                ScreenManager.AddScreen(new BackgroundScreen());
+                ScreenManager.AddScreen(new MainMenuScreen());
+            }
             CheckHits();
 
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
@@ -456,7 +464,7 @@ namespace PONG
             Paddle p = (Paddle)param2;
             //TODO: incorporate spin and also whether or not we hit the rounded part
             b.Velocity.Y = -b.Velocity.Y;
-            particles.CreateDefaultCollisionEffect(new Vector2(b.Position.X + b.Diameter / 2, b.Position.Y + b.Diameter / 2));
+            particles.CreateDefaultCollisionEffect(new Vector2(b.Position.X + b.Radius, b.Position.Y + b.Radius));
 
             //Sound pong or ping here
         }
@@ -466,15 +474,40 @@ namespace PONG
             Ball b = (Ball)param1;
             Wall w = (Wall)param2;
             b.Velocity.X = -b.Velocity.X;
-            particles.CreateDefaultCollisionEffect(new Vector2(b.Position.X + b.Diameter / 2, b.Position.Y + b.Diameter / 2));
+            particles.CreateDefaultCollisionEffect(new Vector2(b.Position.X + b.Radius, b.Position.Y + b.Radius));
 
             //pew
+        }
+
+        public void BouncePowerupBubbleOffWall(PongObject param1, PongObject param2)
+        {
+            PowerupBubble p = (PowerupBubble)param1;
+            p.Velocity.X *= -1.0f;
+        }
+
+        public void BallHitsPowerupBubble(PongObject param1, PongObject param2)
+        {
+            PowerupBubble p = (PowerupBubble)param2;
+            p.powerup.Activate();
+            p.IsActive = false;
+            particles.CreateBubblePopEffect(new Vector2(p.Position.X + p.Radius, p.Position.Y + p.Radius));
+        }
+
+        public void PaddleHitsPowerupBubble(PongObject param1, PongObject param2)
+        {
+            PowerupBubble p = (PowerupBubble)param1;
+            p.powerup.Activate();
+            p.IsActive = false;
+            particles.CreateBubblePopEffect(new Vector2(p.Position.X + p.Radius, p.Position.Y + p.Radius));
         }
 
         private void RegisterCallbackFunctions()
         {
             CollisionManager.RegisterCallback("Ball", "Paddle", BounceBallOffPaddle);
             CollisionManager.RegisterCallback("Ball", "Wall", BounceBallOffWall);
+            CollisionManager.RegisterCallback("Ball", "Bubble", BallHitsPowerupBubble);
+            CollisionManager.RegisterCallback("Bubble", "Paddle", PaddleHitsPowerupBubble);
+            CollisionManager.RegisterCallback("Bubble", "Wall", BouncePowerupBubbleOffWall);
         }
 
         #endregion

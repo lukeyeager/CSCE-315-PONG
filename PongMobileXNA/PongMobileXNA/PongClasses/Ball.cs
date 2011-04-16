@@ -17,12 +17,42 @@ namespace PongClasses
     {
         public Vector2 Position;
         public Vector2 Velocity;
-        public float spin;
+        public float Spin;
+        public float Rotation;
         public Texture2D Texture;
         public bool IsActive;
 
+        /// <summary>
+        /// This gets multiplied by the default speed (250)
+        /// </summary>
+        /// <remarks>So, MaxSpeed=2 means twice the normal speed, 0.5 means half speed, etc</remarks>
+        public float MaxSpeed;
+
         public void Update(float elapsed)
         {
+            if (!IsActive)
+            {
+                if (IsTracked)
+                {
+                    CollisionManager.RemoveObject("Ball", this);
+                    IsTracked = false;
+                }
+                return;
+            }
+
+            if (!IsTracked)
+            {
+                CollisionManager.AddObject("Ball", this);
+                IsTracked = true;
+            }
+
+            Rotation += Spin * elapsed;
+
+            //Find the magnitude of the Velocity vector
+            float velMagnitude = (float)Math.Sqrt(Velocity.X * Velocity.X + Velocity.Y * Velocity.Y);
+            //Adjust Velocity to match the MaxSpeed magnitude
+            Velocity *= (MaxSpeed * 250 / velMagnitude);
+
             Position += Velocity * elapsed;
             UpdateShape();
         }
@@ -35,10 +65,12 @@ namespace PongClasses
 
         public Int32 Diameter
         {
-            get
-            {
-                return Texture.Width;
-            }
+            get { return Texture.Width; }
+        }
+
+        public Int32 Radius
+        {
+            get { return Diameter / 2; }
         }
     }
 }

@@ -19,7 +19,6 @@ namespace PONG
         {
             base.Start();
 
-            powerups.CreatePowerupFastball();
             powerups.CreatePowerupMultiball();
         }
 

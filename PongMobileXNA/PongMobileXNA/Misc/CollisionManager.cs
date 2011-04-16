@@ -49,6 +49,46 @@ public static class CollisionManager
     //TODO: optimize this somehow
     public static void HandleCollisions()
     {
+
+        //Added 04/15 by LCY
+        // This check for validity of all objects is needed because when a PowerupBubble
+        // is "popped", it happens within the loop below, and then a delegate function tries
+        // to remove it from the list, but there's a foreach loop that needs the list of objects
+        // not to change. There is probably a better way to fix the problem, but this seems to work
+        bool everythingValid = false;
+
+        while (!everythingValid)
+        {
+            everythingValid = true;
+            foreach (KeyValuePair<string, LinkedList<PongObject>> o in Objects)
+            {
+                if (o.Key == "Ball")
+                    foreach (Ball b in o.Value)
+                    {
+                        if (!b.IsActive)
+                        {
+                            o.Value.Remove(b);
+                            everythingValid = false;
+                            break;
+                        }
+                    }
+                if (!everythingValid)
+                    break;
+                if (o.Key == "Bubble")
+                    foreach (PowerupBubble b in o.Value)
+                    {
+                        if (!b.IsActive)
+                        {
+                            o.Value.Remove(b);
+                            everythingValid = false;
+                            break;
+                        }
+                    }
+                if (!everythingValid)
+                    break;
+            }
+        }
+
         foreach (KeyValuePair<String, Dictionary<String, LinkedList<CollisionDelegate>>> kv1 in Callbacks)
         {
             if (!Objects.ContainsKey(kv1.Key))
