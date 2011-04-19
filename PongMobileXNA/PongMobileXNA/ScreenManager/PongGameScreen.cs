@@ -26,30 +26,48 @@ namespace PONG
         #region Fields
 
         //Textures (images)
+        /// <summary>
+        /// Black screen to draw sprites over
+        /// </summary>
         public Texture2D backgroundTexture;
         public Texture2D defaultTopPaddleTexture;
         public Texture2D defaultBottomPaddleTexture;
 
         //Misc Managers
+        /// <summary>
+        /// Manages particle effects
+        /// </summary>
         public ParticleSystem particles;
+        /// <summary>
+        /// Manages powerups
+        /// </summary>
         public PowerupManager powerups;
+        /// <summary>
+        /// Handles all functions pertaining to balls in the game
+        /// </summary>
         public BallManager ballManager;
-        public AudioManager audio;
-
-        //Sound Effects
-        public SoundEffect hitWallSound;
 
         // Input related variables
         public AccelerometerReadingEventArgs accelState;
         public Accelerometer Accelerometer;
-        public TouchLocation bottomPaddleTouch;
+        /// <summary>
+        /// The ID for the TouchLocation of the bottom paddle
+        /// </summary>
+        /// <remarks>When the paddle is not being touched, this is -1</remarks>
         public Int32 bottomPaddleTouchId;
+        public TouchLocation bottomPaddleTouch;
         public List<TouchLocation> lastTouchInput;
         public List<Keys> lastKeyInput;
         public float lastAccelInput;
 
         //Data Members
+        /// <summary>
+        /// The paddle at the top
+        /// </summary>
         public Paddle topPaddle;
+        /// <summary>
+        /// The paddle at the bottom
+        /// </summary>
         public Paddle bottomPaddle;
 
         //Screen size
@@ -60,8 +78,6 @@ namespace PONG
 
         //Settings
         public const Int32 paddleTouchBufferSize = 50;
-        public const float maxPaddleSpeed = 8f;
-        public const float paddleFriction = 0.8f;
         public const float paddleBounceFriction = 0.0f;
 
         #endregion
@@ -102,8 +118,6 @@ namespace PONG
             defaultTopPaddleTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/defaultTopPaddle");
             defaultBottomPaddleTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/defaultBottomPaddle");
             backgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/background");
-
-            //Dangerous to load sounds here...
 
             //Initialize managers
             ballManager = new BallManager(ScreenManager.Game.Content, this, ScreenManager.SpriteBatch);
@@ -153,13 +167,11 @@ namespace PONG
             base.UnloadContent();
         }
 
-        private void finishCurrentGame()
-        {
-            foreach (GameScreen screen in ScreenManager.GetScreens())
-                screen.ExitScreen();
-            ScreenManager.AddScreen(new BackgroundScreen());
-            ScreenManager.AddScreen(new MainMenuScreen());
-        }
+        /// <summary>
+        /// Called when the game ends, move to a new screen
+        /// </summary>
+        /// <remarks>This is purely virtual, must be overridden by </remarks>
+        public virtual void finishCurrentGame() { }
 
         #endregion
 
@@ -214,22 +226,15 @@ namespace PONG
             {
                 if (lastKeyInput.Contains(Keys.Left) && !lastKeyInput.Contains(Keys.Right))
                 {
-                    bottomPaddle.Velocity.X += -0.5f;
+                    bottomPaddle.Velocity.X += -0.3f * bottomPaddle.MaxSpeed;
                 }
                 else if (lastKeyInput.Contains(Keys.Right) && !lastKeyInput.Contains(Keys.Left))
                 {
-                    bottomPaddle.Velocity.X += 0.5f;
+                    bottomPaddle.Velocity.X += 0.3f * bottomPaddle.MaxSpeed;
                 }
             }
 
-            if (bottomPaddle.Velocity.X > maxPaddleSpeed)
-                bottomPaddle.Velocity.X = maxPaddleSpeed;
-            else if (bottomPaddle.Velocity.X < -maxPaddleSpeed)
-                bottomPaddle.Velocity.X = -maxPaddleSpeed;
-
-            // Move the bottomPaddle
-            bottomPaddle.Position += bottomPaddle.Velocity * 128.0f * elapsed;
-            bottomPaddle.Velocity *= paddleFriction;
+            bottomPaddle.Update(elapsed);
 
             if (bottomPaddle.Position.X <= screenLeftBound - bottomPaddle.Width/2)
             {
@@ -241,7 +246,6 @@ namespace PONG
                 bottomPaddle.Position = new Vector2(screenRightBound - bottomPaddle.Width + bottomPaddle.Width / 2, bottomPaddle.Position.Y);
                 bottomPaddle.Velocity *= -paddleBounceFriction;
             }
-            bottomPaddle.UpdateShape();
         }
 
         /// <summary>
@@ -251,8 +255,7 @@ namespace PONG
         /// <param name="elapsed"></param>
         public virtual void UpdateTopPaddle(float elapsed)
         {
-            topPaddle.Position += topPaddle.Velocity * 128.0f * elapsed;
-            topPaddle.Velocity *= paddleFriction;
+            topPaddle.Update(elapsed);
 
             if (topPaddle.Position.X <= screenLeftBound - topPaddle.Width/2)
             {
@@ -264,7 +267,6 @@ namespace PONG
                 topPaddle.Position = new Vector2(screenRightBound - topPaddle.Width + topPaddle.Width/2, topPaddle.Position.Y);
                 topPaddle.Velocity = new Vector2(0, 0);
             }
-            topPaddle.UpdateShape();
         }
 
         #endregion
@@ -273,7 +275,7 @@ namespace PONG
 
 
         /// <summary>
-        /// Draw the game world, effects, and HUD
+        /// Draw the background and all game sprites
         /// </summary>
         /// <param name="gameTime">The elapsed time since last Draw</param>
         public override void Draw(GameTime gameTime)
@@ -311,14 +313,6 @@ namespace PONG
         void DrawTopPaddle()
         {
             ScreenManager.SpriteBatch.Draw(topPaddle.Texture, topPaddle.Position, Color.White);
-        }
-
-        /// <summary>
-        /// Draw the hud, which consists of the score elements and the GAME OVER tag.
-        /// </summary>
-        void DrawHud()
-        {
-            //TODO: draw score?
         }
 
         #endregion
@@ -457,6 +451,11 @@ namespace PONG
 
         #region Collision detection callbacks
 
+        /// <summary>
+        /// Collision callback for Ball and Paddle
+        /// </summary>
+        /// <param name="param1"></param>
+        /// <param name="param2"></param>
         public void BounceBallOffPaddle(PongObject param1, PongObject param2)
         {
             Ball b = (Ball)param1;
@@ -468,6 +467,11 @@ namespace PONG
             //Sound pong or ping here
         }
 
+        /// <summary>
+        /// Collision callback for Ball and Wall
+        /// </summary>
+        /// <param name="param1"></param>
+        /// <param name="param2"></param>
         public void BounceBallOffWall(PongObject param1, PongObject param2)
         {
             Ball b = (Ball)param1;
@@ -478,6 +482,11 @@ namespace PONG
             //pew
         }
 
+        /// <summary>
+        /// Collision callback for PowerupBubble and Wall
+        /// </summary>
+        /// <param name="param1"></param>
+        /// <param name="param2"></param>
         public void BouncePowerupBubbleOffWall(PongObject param1, PongObject param2)
         {
             PowerupBubble p = (PowerupBubble)param1;

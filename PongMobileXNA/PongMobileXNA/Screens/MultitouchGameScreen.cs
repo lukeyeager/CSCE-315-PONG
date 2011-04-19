@@ -38,6 +38,18 @@ namespace PONG
 
         #endregion
 
+        #region Finalization
+
+        public override void finishCurrentGame()
+        {
+            foreach (GameScreen screen in ScreenManager.GetScreens())
+                screen.ExitScreen();
+            ScreenManager.AddScreen(new BackgroundScreen());
+            ScreenManager.AddScreen(new MainMenuScreen());
+        }
+
+        #endregion
+
         #region Update
 
         public override void UpdateTopPaddle(float elapsed)
@@ -53,18 +65,13 @@ namespace PONG
             {
                 if (lastKeyInput.Contains(Keys.D) && !lastKeyInput.Contains(Keys.F))
                 {
-                    topPaddle.Velocity.X += -0.5f;
+                    topPaddle.Velocity.X += -0.3f * topPaddle.MaxSpeed;
                 }
                 else if (lastKeyInput.Contains(Keys.F) && !lastKeyInput.Contains(Keys.D))
                 {
-                    topPaddle.Velocity.X += 0.5f;
+                    topPaddle.Velocity.X += 0.3f * topPaddle.MaxSpeed;
                 }
             }
-
-            if (topPaddle.Velocity.X > maxPaddleSpeed)
-                topPaddle.Velocity.X = maxPaddleSpeed;
-            else if (topPaddle.Velocity.X < -maxPaddleSpeed)
-                topPaddle.Velocity.X = -maxPaddleSpeed;
 
             base.UpdateTopPaddle(elapsed);
         }

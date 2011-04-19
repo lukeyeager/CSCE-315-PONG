@@ -6,7 +6,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using System.IO.IsolatedStorage;
+
 using PongClasses.PongShapes;
+using PONG;
 
 namespace PongClasses
 {
@@ -48,10 +50,8 @@ namespace PongClasses
 
             Rotation += Spin * elapsed;
 
-            //Find the magnitude of the Velocity vector
-            float velMagnitude = (float)Math.Sqrt(Velocity.X * Velocity.X + Velocity.Y * Velocity.Y);
             //Adjust Velocity to match the MaxSpeed magnitude
-            Velocity *= (MaxSpeed * 250 / velMagnitude);
+            Velocity *= (MaxSpeed * Settings.BallSpeedMultiplier / Velocity.Length());
 
             Position += Velocity * elapsed;
             UpdateShape();

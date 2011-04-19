@@ -283,6 +283,9 @@ namespace PONG
                     b.MaxSpeed = 2.0f;
             }
 
+            screen.topPaddle.MaxSpeed = 2.0f;
+            screen.bottomPaddle.MaxSpeed = 2.0f;
+
             activePowerups.Add((Powerup)sender);
         }
 
@@ -296,6 +299,9 @@ namespace PONG
                 if (b.MaxSpeed == 2.0f)
                     b.MaxSpeed = 1.0f;
             }
+
+            screen.topPaddle.MaxSpeed = 1.0f;
+            screen.bottomPaddle.MaxSpeed = 1.0f;
 
             activePowerups.Remove((Powerup)sender);
         }

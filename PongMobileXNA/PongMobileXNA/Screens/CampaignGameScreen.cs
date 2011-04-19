@@ -19,7 +19,20 @@ namespace PONG
         {
             base.Start();
 
+            powerups.CreatePowerupFastball();
             powerups.CreatePowerupMultiball();
+        }
+
+        #endregion
+
+        #region Finalization
+
+        public override void  finishCurrentGame()
+        {
+            foreach (GameScreen screen in ScreenManager.GetScreens())
+                screen.ExitScreen();
+            ScreenManager.AddScreen(new BackgroundScreen());
+            ScreenManager.AddScreen(new MainMenuScreen());
         }
 
         #endregion
