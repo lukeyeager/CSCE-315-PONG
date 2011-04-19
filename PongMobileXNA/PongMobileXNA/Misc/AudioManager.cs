@@ -87,6 +87,7 @@ namespace PONG
             audioManager = new AudioManager(game);
 
             game.Components.Add(audioManager);
+            
         }
 
         #endregion
@@ -101,14 +102,16 @@ namespace PONG
             string soundLocation = "Sounds/";
 
             audioManager.soundNames = new string[,] 
-            { 
-                {"RedButton", "red"},
-                {"GreenButton", "green"},
-                {"BlueButton", "blue"},
-                {"YellowButton", "yellow"},
-                {"HighScoreScreen", "doorOpen"},
-                {"LevelComplete", "success"},
-                {"DefeatBuzzer", "fail"}
+            {                  
+                {"pew", "Pew"},
+                {"game_start", "Start"},
+                {"dink", "Dink"},
+                {"ping", "Ping"},
+                {"point_p1", "P1_point"},
+                {"pong", "Pong"},
+                {"the_game", "Intro"},
+                {"victory_p1", "P1_win"},
+                {"victory_p2", "P2_win"}
             };
 
             audioManager.soundBank = new Dictionary<string, SoundEffectInstance>();

@@ -15,4 +15,12 @@ Content\Fonts\gamefont.xnb
 Content\Fonts\menufont.xnb
 Content\Fonts\ScoreFont.xnb
 Content\Fonts\TitleFont.xnb
-Content\Sounds\hitWall.xnb
+Content\Sounds\dink.xnb
+Content\Sounds\game_start.xnb
+Content\Sounds\pew.xnb
+Content\Sounds\ping.xnb
+Content\Sounds\point_p1.xnb
+Content\Sounds\pong.xnb
+Content\Sounds\the_game.xnb
+Content\Sounds\victory_p1.xnb
+Content\Sounds\victory_p2.xnb

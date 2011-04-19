@@ -25,6 +25,7 @@ namespace PongMobileXNA
         public Pong()
         {
             graphics = new GraphicsDeviceManager(this);
+            AudioManager.Initialize(this);
             //Set the Windows Phone screen resolution
             graphics.PreferredBackBufferWidth = 480;
             graphics.PreferredBackBufferHeight = 800;
@@ -37,6 +38,9 @@ namespace PongMobileXNA
             //Add two new screens
             screenManager.AddScreen(new BackgroundScreen());
             screenManager.AddScreen(new LoadingScreen());
+
+            //Load audiomanager sounds, not the sane place to do this, but safest
+            AudioManager.LoadSounds();
         }
 
         /// <summary>

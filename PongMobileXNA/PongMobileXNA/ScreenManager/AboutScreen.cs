@@ -66,6 +66,7 @@ namespace PONG
             ScreenManager.SpriteBatch.Draw(about, new Vector2(0, 0),
                  new Color(255, 255, 255, TransitionAlpha));
             ScreenManager.SpriteBatch.End();
+            AudioManager.PlaySound("Intro");
         }
 
         #endregion

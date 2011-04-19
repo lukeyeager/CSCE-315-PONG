@@ -44,7 +44,7 @@ namespace PONG
             ScreenManager.Game.Content.Load<object>("Fonts/titlefont");
 
             //Sounds
-            ScreenManager.Game.Content.Load<object>("Sounds/hitWall");
+            //ScreenManager.Game.Content.Load<object>("Sounds/hitWall");
 
         }
 

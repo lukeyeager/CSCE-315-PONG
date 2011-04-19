@@ -103,8 +103,7 @@ namespace PONG
             defaultBottomPaddleTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/defaultBottomPaddle");
             backgroundTexture = ScreenManager.Game.Content.Load<Texture2D>("Images/background");
 
-            //Load Sound Effects
-            hitWallSound = ScreenManager.Game.Content.Load<SoundEffect>("Sounds/hitWall");
+            //Dangerous to load sounds here...
 
             //Initialize managers
             ballManager = new BallManager(ScreenManager.Game.Content, this, ScreenManager.SpriteBatch);
