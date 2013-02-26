@@ -2,19 +2,8 @@ README for Group 4
 PongMobile
 Game for Windows Phone 7
 
-Contact info : 
+Contributers:
 Ryan Schmidt
-ryan-schmidt@tamu.edu
-262-844-3829
-
 Luke Yeager
-luke.yeager@gmail.com
-512-296-9815
-
 Sergio Barrio
-serg.barrio@gmail.com
-915-588-6386
-
 Kailean Courtney
-kailean@gmail.com
-214-636-8018
